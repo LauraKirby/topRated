@@ -31,14 +31,6 @@ app.get('/', function(req, res){
 	res.redirect("searches/index");
 });
 
-// app.get('/searches/index', function(req, res){
-// 	var getUrl = "http://api.yelp.com/v2/search?term=food&location=San+Francisco"
-// 	yelp.search(getUrl, function(err, data){
-// 		console.log(data); 
-// 		res.render("searches/index");
-// 	});
-// });
-
 app.get('/searches/index', function(req, res){
 	yelp.search({term: "food", location: "San Francisco", limit: 1}, function(err, yelpDataJson){
 		if (err){
