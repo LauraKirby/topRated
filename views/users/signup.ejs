@@ -1,0 +1,30 @@
+<% include ../partials/header %>
+
+<h3>User Signup</h3>
+
+<div>
+	<form action="/signup" method="POST">
+    <div>
+      <label for="userName">User Name:</label>
+      <input autofocus  type="text" name="title">
+    </div>
+    <div>
+      <label for="userImage">User Image:</label>
+      <input type="text" name="userImage">
+    </div>
+    <div>
+      <label for="email">User Email:</label>
+      <input type=text name="email">
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input type=text name="password">
+    </div>
+    <div>
+      <input type="submit" value="Login" class ="btn btn-info">
+    </div>
+  </form>
+</div>
+
+
+<% include ../partials/footer %>
