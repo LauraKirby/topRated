@@ -4,7 +4,7 @@ var Favorite = require("./favorite");
 var userSchema = new mongoose.Schema({
 	userName: String, 
 	userImage: String, 
-	email: Number,
+	email: String,
 	password: String, 
 	//i won't need this if i set up the routes like miles showed me for the reddit app
 	// comments:[{

@@ -28,32 +28,59 @@ var yelp = require("yelp").createClient({
 
 //Root Dir
 app.get('/', function(req, res){
-	res.redirect("searches/index");
+	res.redirect("/index");
 });
 
-app.get('/searches/index', function(req, res){
+//landing page
+app.get('/index', function(req, res){
 	yelp.search({term: "food", location: "San Francisco", limit: 1}, function(err, yelpDataJson){
-		if (err){
-			res.render('404'); 
-			console.log(err); 
-		} else {
-			console.log(yelpDataJson); 
-			res.render("searches/index");
-		}
+		if (err) throw err;
+		//console.log(yelpDataJson);
+		res.render("index");
 	});
 });
 
-//Signup
-app.get('/users/signup', function(req, res){
+//Signup - show sign up form
+app.get('/signup', function(req, res){
 	res.render("users/signup")
 });
+
+//Store all users
+// app.get('/profile', function(req, res){
+// 	db.User.find({}, function(err, users){
+// 		res.render("users/index", {users:users}); 
+// 	});
+// });
+
+//Profile Page - one user - users/index
+app.get('/users/:id/profile', function(req, res){
+	db.User.findById(req.params.id, function(err, oneUser){
+		if (err) throw err;
+		res.render('users/show', {oneUser:oneUser}); 
+
+	});
+});
  
+//CREATE -- Send data to server 
+app.post('/users', function(req, res){
+	newUser = req.body.user; 
+	db.User.create(newUser, function(err, userData){
+		//create saves to database
+		//userData is what gets created from the save function (save function is within the create function)
+		if (err) {
+			console.log(err);
+		}
+		res.redirect("/users/" + userData.id + "/profile")
+	})
+
+})
 // CATCH ALL
 app.get('*', function(req,res){
-  res.render('404');
+  res.render('errors/404');
 });
 
 // START SERVER
 app.listen(3000, function(){
   "Server is listening on port 3000";
 });
+

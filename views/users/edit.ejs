@@ -1,0 +1,30 @@
+<% include ../partials/header %>
+
+<h2>
+	Profile Edit Page
+</h2>
+
+<div>
+ <form action="/users/<%= user.id %>"> 
+	<div>
+		<label for="nameName">User Name: </label>
+		<input type="text" name="user[userName]" class="form-control" value="<%= user.userName %>" autofocus>
+	</div>
+	<div>
+		<label for="userImage">Image:</label>
+		<input type="text" name="user[userImage]" class="form-control" value="<%= user.userImage %>">
+	</div>
+	<div>
+		<label for="score">Email:</label>
+		<input type="text" name="user[email]" id="" class="form-control" value="<%= user.email %>">
+	</div>
+	<div>
+		<p></p>
+	</div>
+	<div class="form-group">
+	  <input type="submit" value="Done" class ="btn btn-info">
+	</div>
+</form>
+</div>
+
+<% include ../partials/footer %>
