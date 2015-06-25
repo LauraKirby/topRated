@@ -28,15 +28,16 @@ var yelp = require("yelp").createClient({
 
 //Root Dir
 app.get('/', function(req, res){
-	res.redirect("/index");
+	res.render("landingPage");
 });
 
 //landing page
-app.get('/index', function(req, res){
-	yelp.search({term: "food", location: "San Francisco", limit: 1}, function(err, yelpDataJson){
+app.get('/search', function(req, res){
+	yelp.search({term: req.query.term, location: "San Francisco", limit: 1}, function(err, yelpDataJson){
 		if (err) throw err;
-		//console.log(yelpDataJson);
-		res.render("index");
+		console.log(yelpDataJson);
+		console.log(req.query.term);
+		res.render("search/results");
 	});
 });
 
@@ -57,7 +58,7 @@ app.get('/users/:id/profile', function(req, res){
  
 //CREATE -- Send data to server 
 app.post('/users', function(req, res){
-	newUser = req.body.user; 
+	newUser = req.body.user; //"user" is from ejs
 	db.User.create(newUser, function(err, userData){
 		//create saves to database
 		//userData is what gets created from the save function (save function is within the create function)
@@ -66,8 +67,11 @@ app.post('/users', function(req, res){
 		}
 		res.redirect("/users/" + userData.id + "/profile")
 	})
+});
 
-})
+app.get('/search', function(req, res){
+	var newSearch = req.body.search; //"search" is from ejs
+});
 // CATCH ALL
 app.get('*', function(req,res){
   res.render('errors/404');
