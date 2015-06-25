@@ -2,7 +2,8 @@ var mongoose = require("mongoose");
 var Favorite = require("./favorite"); 
 
 var userSchema = new mongoose.Schema({
-	userName: String, 
+	userFirstName: String, 
+	userLastName: String, 
 	userImage: String, 
 	email: String,
 	password: String, 
