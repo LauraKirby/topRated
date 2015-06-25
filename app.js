@@ -33,19 +33,18 @@ app.get('/', function(req, res){
 
 //Search
 app.get('/search', function(req, res){
+	var term = req.query.term;
 	yelp.search({
-		term: req.query.term, 
+		term: term, 
 		location: req.query.location, 
-		limit: req.query.limit 
+		limit: 10 
 	}, 
-		function(err, yelpData){
+		function(err, results){
 			if (err) throw err;
-			console.log(yelpData)
-			//console.log("req.query is " + req.query.location)
-			//console.log("yelpDataJson.region.span.latitude_delta is " + yelpData.region.span.latitude_delta)
-			var resultBusinesses = yelpData.businesses[0].name;
-			console.log("Testing Business " + resultBusinesses);
-			res.render("search/results", {yelpData:yelpData});
+			console.log(results)
+			//res.send(results)
+			console.log(results.businesses[0].name)
+			res.render("search/results", {results:results, term:term});
 		});
 
 });
