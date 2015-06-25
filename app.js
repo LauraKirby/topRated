@@ -26,20 +26,33 @@ var yelp = require("yelp").createClient({
 
 //--------Create Search Routes-----------//
 
-//Root Dir
+//Root Dir & landing page
 app.get('/', function(req, res){
 	res.render("landingPage");
 });
 
-//landing page
+//Search
 app.get('/search', function(req, res){
-	yelp.search({term: req.query.term, location: "San Francisco", limit: 1}, function(err, yelpDataJson){
-		if (err) throw err;
-		console.log(yelpDataJson);
-		console.log(req.query.term);
-		res.render("search/results");
-	});
+	yelp.search({
+		term: req.query.term, 
+		location: req.query.location, 
+		limit: req.query.limit 
+	}, 
+		function(err, yelpData){
+			if (err) throw err;
+			console.log(yelpData)
+			//console.log("req.query is " + req.query.location)
+			//console.log("yelpDataJson.region.span.latitude_delta is " + yelpData.region.span.latitude_delta)
+			var resultBusinesses = yelpData.businesses[0].name;
+			console.log("Testing Business " + resultBusinesses);
+			res.render("search/results", {yelpData:yelpData});
+		});
+
 });
+
+//POST favorite
+//business id
+//user id
 
 //Signup - show sign up form
 app.get('/signup', function(req, res){
@@ -69,9 +82,7 @@ app.post('/users', function(req, res){
 	})
 });
 
-app.get('/search', function(req, res){
-	var newSearch = req.body.search; //"search" is from ejs
-});
+
 // CATCH ALL
 app.get('*', function(req,res){
   res.render('errors/404');
