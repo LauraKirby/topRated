@@ -1,8 +1,11 @@
 var mongoose = require("mongoose"); 
 
 var favoriteSchema = new mongoose.Schema({
-	favoriteName: String, 
-	favoriteUrl: String, 
+	favName: String, 
+	favUrl: String, 
+	favImage: String, 
+	favNumReviews: String, 
+	favRating: String, 
 });
 
 var Favorite = mongoose.model("Favorite", favoriteSchema); 
