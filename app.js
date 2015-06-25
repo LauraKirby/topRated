@@ -45,12 +45,6 @@ app.get('/signup', function(req, res){
 	res.render("users/signup")
 });
 
-//Store all users
-// app.get('/profile', function(req, res){
-// 	db.User.find({}, function(err, users){
-// 		res.render("users/index", {users:users}); 
-// 	});
-// });
 
 //Profile Page - one user - users/index
 app.get('/users/:id/profile', function(req, res){

@@ -1,23 +1,29 @@
 <% include ../partials/header %>
 
-<h2>hi from Profile "Show" page</h2>
+<h2>User Profile Page: show.ejs </h2>
 
-<div>
-	<p>information about person logged in</p>
-</div>
+  <div>
+ 	  <h3>Welcome <%= oneUser.userName %></h3>
+ 	  <p><img src="<%= oneUser.userImage %>" alt="user image"></p>
+  </div>
+
+  <form action="/searches" method='POST'>
+	  <div>
+	    <label for="businessName">Search:</label>
+	    <input type="text" name="user[businessName]" autofocus>
+    </div>
+    <div>
+    	<label for="city">City</label>
+  	  <input type="text" name="user[city]" >
+    </div>
+    <div>
+      <label for="limit">Limit</label>
+      <input type="text" name="search[limit]">
+    </div>
+    <div>
+  	  <input type="submit" value="Search" class="btn btn-success">
+    </div>
+  </form>
  
- <div>
- 	<h1><%= oneUser.userName %></h1>
- </div>
-
-
-<%= oneUser.userImage %> 
-<%= oneUser.email %>
-
-	</div>
-	  
-	</div>
-</form>
-
 
 <% include ../partials/footer %>
