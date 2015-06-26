@@ -44,7 +44,7 @@
 			  <%= business.distance %>
 			</td>
 			<td>   
-				<form action="/favorites/<%= id %>" method="POST">
+				<form action="/users/<%= id %>/favorites/" method="POST">
 					<input type="submit" value="Favorite" class="ui blue labeled button">
 					<input type="hidden" name="business[name]" value="<%= business.name %>">
 					</form>

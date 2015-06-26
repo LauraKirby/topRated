@@ -48,7 +48,7 @@ app.post('/login', function(req, res) { //do not need middleware bc of authentic
 				res.render("landingPage", {errorStr: err}); 
 			} else if(!err && user !== null) {
 				req.login(user); 
-				res.redirect("/users/" + user._id); 
+				res.redirect("/users/" + user._id); //here we are stating that it is clearly a mongo id
 			} else {
 				res.render("landingPage", {errorStr: "Error: Could not authenticate"}); 
 			}
@@ -134,10 +134,6 @@ app.get('/search', routeMiddleware.ensureLoggedIn, function(req, res){
 
 });
 
-//POST favorite
-//business id
-//user id
-
 //use .sort to put number of reviews from higher to lower
 
 
@@ -145,30 +141,27 @@ app.get('/search', routeMiddleware.ensureLoggedIn, function(req, res){
 
 
 //INDEX -- Click "Favorites in Menu Bar" -- See all Favorites
-app.get('/favorites/:id', function(req, res){
+app.get('/users/:id/favorites', function(req, res){
 	db.User.findById(req.params.id).exec(function(err, user){
-		if (err){
-			console.log(err)
-		} 
+		if (err) throw err;
 		db.Favorite.find({user: req.params.id}, 
-			function(err, favorites){
-			if (err){
-					console.log(err)
-				} 
-			user.favorites = favorites;
+			function(err, favoritesByUserId){
+				if (err) throw err; 
+				user.favorites = favoritesByUserId;
+				res.render('favorites/index', {user:user, id:req.session.id})
 		});
 	});
 });
 
 //CREATE favorite from results page
-app.post('/favorites/:id', function (req, res){
-	var newFav = req.body.business //-- want to do something like this
-	db.Favorite.create({user: req.params.user_id, favName: newFav.name}, 
+app.post('/users/:id/favorites', function (req, res){
+	var newFav = req.body.business 
+	db.Favorite.create({user: req.params.id, favName: newFav.name}, 
 		function(err, savedFav){
 			if (err){
 				console.log(err)
 			} else {
-				res.redirect('/favorites/' + req.session.id);
+				res.redirect('/users/' + req.session.id + '/favorites');
 				//res.send(savedFav) //will need to add res.format (3 types)
 			} 
 	});
