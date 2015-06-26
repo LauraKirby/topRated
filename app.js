@@ -61,7 +61,8 @@ app.get('/signup', function(req, res){
 });
 
 //CREATE User -- Send data to server 
-app.post('/signup', function(req, res){ //does the route name really matter (other than it needs to match the button so it is accessed) since we are redirecting? maybe the route matters in terms of REST? 
+app.post('/signup', function(req, res){ //does the route name really matter (other than it needs to match the button so it is accessed) since we are redirecting? 
+	//maybe the route matters in terms of REST? 
 	var newUser = req.body.user; //"user" is from ejs
 	db.User.create(newUser, function(err, savedUser){ //savedUser refers to the new user created and saved. save has a callback function with (err and newUser)
 		//create saves to database
@@ -70,8 +71,8 @@ app.post('/signup', function(req, res){ //does the route name really matter (oth
 			console.log(err);
 		} else if (savedUser){
 			req.login(savedUser); //user is now logged in, we have access to req.session.id
-			res.redirect('/users/:id'); //+ req.session.id, {savedUser:savedUser, id: req.session.id} 
-		} 														//do i need all this or is it passed in at the redirect route?
+			res.redirect('/users/' + req.session.id)
+		} 													
 		else {
 			console.log("something else happend")
 		}
