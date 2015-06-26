@@ -141,7 +141,7 @@ app.get('/search', routeMiddleware.ensureLoggedIn, function(req, res){
 
 
 //INDEX -- Click "Favorites in Menu Bar" -- See all Favorites
-app.get('/users/:id/favorites', function(req, res){
+app.get('/users/:id/favorites', routeMiddleware.ensureLoggedIn, function(req, res){
 	db.User.findById(req.params.id).exec(function(err, user){
 		if (err) throw err;
 		db.Favorite.find({user: req.params.id}, 
@@ -154,7 +154,7 @@ app.get('/users/:id/favorites', function(req, res){
 });
 
 //CREATE favorite from results page
-app.post('/users/:id/favorites', function (req, res){
+app.post('/users/:id/favorites', routeMiddleware.ensureLoggedIn, function (req, res){
 	var newFav = req.body.business 
 	db.Favorite.create({user: req.params.id, favName: newFav.name}, 
 		function(err, savedFav){
