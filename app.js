@@ -141,7 +141,41 @@ app.get('/search', routeMiddleware.ensureLoggedIn, function(req, res){
 //use .sort to put number of reviews from higher to lower
 
 
+//---------------- Favorites -------------------------//
 
+
+//INDEX -- Click "Favorites in Menu Bar" -- See all Favorites
+app.get('/favorites/:id', function(req, res){
+	db.User.findById(req.params.id).exec(function(err, user){
+		if (err){
+			console.log(err)
+		} 
+		db.Favorite.find({user: req.params.id}, 
+			function(err, favorites){
+			if (err){
+					console.log(err)
+				} 
+			user.favorites = favorites;
+		});
+	});
+});
+
+//CREATE favorite from results page
+app.post('/favorites/:id', function (req, res){
+	var newFav = req.body.business //-- want to do something like this
+	db.Favorite.create({user: req.params.user_id, favName: newFav.name}, 
+		function(err, savedFav){
+			if (err){
+				console.log(err)
+			} else {
+				res.redirect('/favorites/' + req.session.id);
+				//res.send(savedFav) //will need to add res.format (3 types)
+			} 
+	});
+});
+
+
+//app.post('')
 
 
  
