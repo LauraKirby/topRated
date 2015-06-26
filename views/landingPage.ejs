@@ -1,14 +1,34 @@
-<% include ./partials/header %>
+<% include ./partials/landingHeader %>
 
 <div class="ui segment">
   <p><h3>Website Landing Page</h3></p>
 </div>
 
+<% if (errorStr != undefined)  { %>
+	<div class="error"><%= errorStr %></div>
+<% } %>
 
+<div>
+  <form action="/login" method="POST">
+		<div>
 
-<div class="content">
-	<a href="/signup" class="ui pink labeled icon button">or sign-up</a> 
+		<label for="password">Email:</label>
+			<input type="text" name="user[email]" placeholder="Email" value="">
+		</div>
+		<div>
+			<label for="password">Password:</label>
+			<input type="password" name="user[password]" placeholder="Password" value="">
+		</div>
+		<p>
+		  <div>
+		  		<input type="submit" value="Login" class="ui green labeled button">
+		  </div>			
+		</p>
+		<div>
+		  	<a href="/signup" class="ui pink labeled button">or sign-up</a> 
+		</div>
+	</form>
 </div>
 
 
-<% include ./partials/footer %>
+<% include ./partials/landingFooter %>

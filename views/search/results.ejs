@@ -1,4 +1,4 @@
-<% include ../partials/header %>
+<% include ../partials/loggedInHeader %>
 
 <div>
 	<p>
@@ -28,7 +28,7 @@
 			  <a href="<%= business.url %>" > <%= business.name %> </a>  
 			</td>
 			<td>
-			  <img src="<%= business.image_url %>" alt="Business Image">
+			  <img class="ui small rounded image" src="<%= business.image_url %>" alt="Business Image">
 			</td>
 			<td>
 			  <%= business.review_count %>
@@ -43,10 +43,9 @@
 			<td>
 			  <%= business.distance %>
 			</td>
-			<td>
+			<td>   
 				<form action="/results/<%= business.id %>?_method=DELETE" method="POST">
-					<input type="submit" value="
-					Favorite" class="ui blue labeled icon button"> </form>
+					<input type="submit" value="Favorite" class="ui blue labeled button"> </form>
 			</td>
 			</tr>
 			<% }); %> 
@@ -54,4 +53,4 @@
 	</table>
 	<div> 
 
-<% include ../partials/footer %>
+<% include ../partials/loggedInFooter %>

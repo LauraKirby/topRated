@@ -15,10 +15,6 @@ ul {
 	font-family: Tahoma, sans-serif;
 }
 
-img {
-	height: 200px;
-	width: 200px;
-}
 
 form {
 	padding-top: 2%;
@@ -26,4 +22,8 @@ form {
 	padding-left: 20%;
 	padding-bottom: 30%;
 	line-height: 2;
+}
+
+.space {
+	padding-left: 2%;
 }

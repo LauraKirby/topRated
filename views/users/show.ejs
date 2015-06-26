@@ -1,27 +1,38 @@
-<% include ../partials/header %>
+<% include ../partials/loggedInHeader %>
 
 <div class="ui segment">
-  <p><h3>User Profile/Home Page</h3></p>
+  <p><h3>Profile Page</h3></p>
 </div>
 
-  <div>
- 	  <h3>Welcome <%= oneUser.userName %></h3>
- 	  <p><img src="<%= oneUser.userImage %>" alt="user image"></p>
+  <div class="ui one column">
+    <h3 class="space">Welcome <%= oneUser.userFirstName %></h3>
   </div>
 
-  <form action='/search'>
-	  <div>
-	    <label for="term">Term:</label>
-	    <input type="text" name="term" autofocus>
+<div class="ui two column centered grid">
+  <div class="four column centered row">
+    <div class="column">
+      <p><img class="ui small rounded image" src="<%= oneUser.userImage %>" alt="user image"></p>
+      <a href="/users/<%= id %>/edit" class="compact mini ui black labeled button">Edit Profile</a>
     </div>
-    <div>
-    	<label for="location">Location:</label>
-  	  <input type="text" name="location" >
+    <div class="column">      
+      <form action='/search'>
+        <div>
+          <p>
+            <input type="text" name="term" autofocus placeholder="term">
+          </p>
+          <p>
+            <input type="text" name="location" placeholder="location">
+          </p>
+          <p>
+            <input type="submit" value="Search" class="ui green labeled button">
+          </p>
+        </div>
+      </form>
     </div>
-    <div>
-  	  <input type="submit" value="Search" class="ui green labeled icon button">
-    </div>
-  </form>
- 
+  </div>
+</div>
 
-<% include ../partials/footer %>
+
+
+
+<% include ../partials/loggedInFooter %>

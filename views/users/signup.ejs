@@ -1,17 +1,14 @@
-<% include ../partials/header %>
+<% include ../partials/landingHeader %>
 
 <div class="ui segment">
   <p><h3>User Signup</h3></p>
 </div>
 
 <div>
-	<form action="/users" method="POST" class="ui form">
-    
-
-
+	<form action="/signup" method="POST" class="ui form">
   <div class="two fields">
     <div class="field">
-        <input type="text" name="user[userFirstName]" placeholder="First Name">
+        <input type="text" name="user[userFirstName]" placeholder="First Name" autofocus>
     </div>
     <div class="field">
          <input type="text" name="user[userImage]" placeholder="Image URL">
@@ -35,4 +32,4 @@
 
   </form>
 </div>
-<% include ../partials/footer %>
+<% include ../partials/landingFooter %>

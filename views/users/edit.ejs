@@ -1,14 +1,14 @@
-<% include ../partials/header %>
+<% include ../partials/loggedInHeader %>
 
 <div class="ui segment">
   <p><h3>Edit Profile</h3></p>
 </div>
 
 <div>
- <form action="/users/<%= user.id %>"> 
+ <form action="/users/<%= user.id %>?_method=put" method="POST"> 
 	<div>
-		<label for="nameName">User Name: </label>
-		<input type="text" name="user[userName]" class="form-control" value="<%= user.userName %>" autofocus>
+		<label for="nameFirstName">User Name: </label>
+		<input type="text" name="user[userFirstName]" class="form-control" value="<%= user.userFirstName %>" autofocus>
 	</div>
 	<div>
 		<label for="userImage">Image:</label>
@@ -22,9 +22,9 @@
 		<p></p>
 	</div>
 	<div class="form-group">
-	  <input type="submit" value="Done" class ="btn btn-info">
+	  <input type="submit" value="Save" class ="btn btn-info">
 	</div>
 </form>
 </div>
 
-<% include ../partials/footer %>
+<% include ../partials/loggedInFooter %>
