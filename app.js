@@ -127,16 +127,18 @@ app.get('/users/:id/search', routeMiddleware.ensureLoggedIn, function(req, res){
 		function(err, results){
 			if (err) {
 				console.log(err); 
-			} else {
+				res.render("errors/404");
+			} else if (results) {
 				userData = db.User.findById(req.session.id, function(err, foundUser){
-					console.log(foundUser); 
+				console.log(foundUser); 
+				var data = "hello"
+				console.log("first item from yelp API returned: " + results.businesses[0].name)
+				res.render("search/results", {results:results, term:term, id:req.session.id, data:userData});
 				})
 			}
 			//console.log(results)
 			//res.send(results)
-			var data = "hello"
-			console.log("first item from yelp API returned: " + results.businesses[0].name)
-			res.render("search/results", {results:results, term:term, id:req.session.id, data:userData});
+			
 		});
 });
 
