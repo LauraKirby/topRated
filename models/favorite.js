@@ -9,8 +9,10 @@ var favoriteSchema = new mongoose.Schema({
 	favName: String, 
 	favUrl: String, 
 	favImage: String, 
-	favNumReviews: String, 
+	favReviewCount: String, 
 	favRating: String, 
+	favAddress: String,
+	favDistance: String
 });
 
 var Favorite = mongoose.model("Favorite", favoriteSchema); 

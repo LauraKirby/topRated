@@ -117,7 +117,7 @@ app.get('/users/:id/logout', function(req, res){
 //------------------- YELP ROUTES -------------------------------//
 
 //Search
-app.get('/search', routeMiddleware.ensureLoggedIn, function(req, res){
+app.get('/users/:id/search', routeMiddleware.ensureLoggedIn, function(req, res){
 	var term = req.query.term;
 	yelp.search({
 		term: term, 
@@ -125,13 +125,19 @@ app.get('/search', routeMiddleware.ensureLoggedIn, function(req, res){
 		limit: 10 
 	}, 
 		function(err, results){
-			if (err) throw err;
-			console.log(results)
+			if (err) {
+				console.log(err); 
+			} else {
+				userData = db.User.findById(req.session.id, function(err, foundUser){
+					console.log(foundUser); 
+				})
+			}
+			//console.log(results)
 			//res.send(results)
-			console.log(results.businesses[0].name)
-			res.render("search/results", {results:results, term:term, id:req.session.id});
+			var data = "hello"
+			console.log("first item from yelp API returned: " + results.businesses[0].name)
+			res.render("search/results", {results:results, term:term, id:req.session.id, data:userData});
 		});
-
 });
 
 //use .sort to put number of reviews from higher to lower
@@ -154,21 +160,37 @@ app.get('/users/:id/favorites', routeMiddleware.ensureLoggedIn, function(req, re
 });
 
 //CREATE favorite from results page
-app.post('/users/:id/favorites', routeMiddleware.ensureLoggedIn, function (req, res){
-	var newFav = req.body.business 
-	db.Favorite.create({user: req.params.id, favName: newFav.name}, 
-		function(err, savedFav){
-			if (err){
-				console.log(err)
+// app.post('/users/:id/favorites', routeMiddleware.ensureLoggedIn, function (req, res){
+// 	var newFav = req.body.business 
+// 	db.Favorite.create({user: req.params.id, favName: newFav.name}, 
+// 		function(err, savedFav){
+// 			if (err){
+// 				console.log(err)
+// 			} else {
+// 				res.redirect('/users/' + req.session.id + '/favorites');
+// 				//res.send(savedFav) //will need to add res.format (3 types)
+// 			} 
+// 	});
+// });
+
+//CREATE favorite from AJAX in searches.js and form in results.ejs page 
+app.post('/users/:user_id/favorites', function (req, res){
+	var favData = req.body.fav
+	db.User.create(
+	{
+		user: req.params.user_id, 
+		favAddress: favData.address, 
+		favReviewCount: favData.reviewCount
+	}, 
+		function (err, savedFav){
+			//  if (err) thow err
+			if (err) {
+				console.log("savedFav ERROR" + err) 
 			} else {
-				res.redirect('/users/' + req.session.id + '/favorites');
-				//res.send(savedFav) //will need to add res.format (3 types)
-			} 
-	});
-});
-
-
-//app.post('')
+				res.json({savedFav:savedFav}); 
+			}
+		});
+}); 
 
 
  

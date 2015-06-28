@@ -8,7 +8,7 @@ var loginHelpers = function(req, res, next) {
 
 	req.logout = function() {
 		req.session.id = null; 
-		req.user = null; //for logging out, is this need?
+		req.user = null; 
 	};
 
 	next(); 
