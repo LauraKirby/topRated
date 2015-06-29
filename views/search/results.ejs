@@ -45,15 +45,14 @@
 						<%= business.location.address %>
 					</td>
 					<td>   
-						<form id="favorite" action="/users/<%= data.id %>/favorites/" method="POST">
-						<input  id="favorited" type="submit" value="Favorite" class="compact mini ui blue labeled button">
-							<input type="hidden" name="business[name]" value="<%= business.name %>">
-							<input type="hidden" id="data" value="<%= id %>">
+						<form id="favorite" action="/users/<%= id %>/favorites/" method="POST">
+						<input id="favorited" type="submit" value="Favorite" class="compact mini ui blue labeled button">
+						<input type="hidden" name="business[name]" value="<%= business.name %>">
+						<input type="hidden" id="data" value="<%= id %>">
 						</form>
 					</td>
 					<td>
-
-						<form id="comment" action="/users/<%= data.id %>/favorites/" method="POST">
+						<form id="comment" action="/users/<%= id %>/favorites/" method="POST">
 							<input  id="comment" type="submit" value="Add Note" class="compact mini ui purple labeled button">
 							<textarea name="textarea" id="comment" cols="20" rows="5" style="display:none">Write Note</textarea>
 						</form>

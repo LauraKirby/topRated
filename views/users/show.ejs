@@ -3,35 +3,38 @@
 <div class="ui one column">
   <div class="ui column row">
     <p><h3 class="ui segment">Welcome <%= oneUser.userFirstName %></h3></p>
-</div>
+  </div>
 
-<div class="ui column centered grid">  
-  <div class="four column centered row">
-    
-    <div class="column">
-      <p><img class="ui small rounded image" src="<%= oneUser.userImage %>" alt="user image"></p>
-      <a href="/users/<%= id %>/edit" class="compact mini ui black labeled button">Edit Profile</a>
-    </div>
-    
-    <div class="column">      
-      <form action='/users/<%= id %>/search'>
-        <p>
-          <input type="text" name="term" autofocus placeholder="term">
-        </p>
-        <p>
-          <input type="text" name="location" placeholder="location">
-        </p>
-        <p>
-          <input type="submit" value="Search" class="ui green labeled button">
+  <div class="ui column centered grid">  
+    <div class="four column centered row">
+      
+      <div class="column">
+        <p><img class="ui small rounded image" src="<%= oneUser.userImage %>" alt="user image"></p>
+        <a href="/users/<%= id %>/edit" class="compact mini ui black labeled button">Edit Profile</a>
+      </div>
+      
+      <div class="column">      
+        <form action='/users/<%= id %>/search'>
+          <p>
+            <input type="text" name="term" autofocus placeholder="term">
+          </p>
+          <p>
+            <input type="text" name="location" placeholder="location">
+          </p>
+          <p>
+            <input type="submit" value="Search" class="ui green labeled button">
+            
+          </div>
+
         </p>
       </form>
     </div>
-  
+    
   </div>
 </div>
 
 <div class="ui two column centered grid">  
-<div class="column">
+  <div class="column">
     <table class="ui table segment">
       <thead>
         <tr><h3>Favorites</h3></tr>
@@ -54,7 +57,7 @@
             <p>favImage</p>
           </td>
           <td id="favReviewCount">
-            <p>favReviewCounte</p>
+            <p>favReviewCount</p>
           </td>
           <td id="favRating">
             <p>favRating</p>
@@ -67,15 +70,15 @@
             <p>favDistance</p>
           </td>
           <td>   
-           <p>edit/new comment</p>
+           <p>edit/view</p>
          </td>
        </tr> 
      </tbody>
-    
+     
    </table>
  </div>
 
 
 
 
-<% include ../partials/loggedInFooter %>
+ <% include ../partials/loggedInFooter %>

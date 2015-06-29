@@ -130,10 +130,11 @@ app.get('/users/:id/search', routeMiddleware.ensureLoggedIn, function(req, res){
 				res.render("errors/404");
 			} else if (results) {
 				userData = db.User.findById(req.session.id, function(err, foundUser){
-				console.log(foundUser); 
-				//var data = "hello"
-				console.log("first item from yelp API returned: " + results.businesses[0].name)
-				res.render("search/results", {results:results, term:term, id:req.session.id, data:userData});
+				//console.log("A FOUND USER" + foundUser); //works, foundUser is an object
+				var id = req.session.id; 
+				//console.log("this is the id " + id) //works
+				console.log("first returned item from the Yelp API: " + results.businesses[0].name)
+				res.render("search/results", {results:results, term:term, id:id});
 				})
 			}
 			//console.log(results)
@@ -149,10 +150,10 @@ app.get('/users/:id/search', routeMiddleware.ensureLoggedIn, function(req, res){
 
 
 //INDEX -- Click "Favorites in Menu Bar" -- See all Favorites
-app.get('/users/:id/favorites', routeMiddleware.ensureLoggedIn, function(req, res){
-	db.User.findById(req.params.id).exec(function(err, user){
+app.get('/users/:user_id/favorites', routeMiddleware.ensureLoggedIn, function(req, res){
+	db.User.findById(req.params.user_id).exec(function(err, user){
 		if (err) throw err;
-		db.Favorite.find({user: req.params.id}, 
+		db.Favorite.find({user: req.params.user_id}, 
 			function(err, favoritesByUserId){
 				if (err) throw err; 
 				user.favorites = favoritesByUserId;

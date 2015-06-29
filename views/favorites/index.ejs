@@ -1,7 +1,7 @@
 <% include ../partials/loggedInHeader %>
 
 <div>
-	<h3>Favorites Index</h3>
+	<h3> <%= user.name %>'s Favorites</h3>
 </div>
 
 <div>
@@ -14,7 +14,12 @@
 	  	</tr>
 	  </thead>
 	    <tbody>
-
+	    <% user.favorites.forEach(function(favorite){ %>
+	      <tr>
+	        	<td><%= favorite.favName %></td>
+	        	<%})%>
+	          
+	      </tr>
 	    </tbody>
 		
 
