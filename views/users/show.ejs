@@ -1,36 +1,78 @@
 <% include ../partials/loggedInHeader %>
 
-<div class="ui segment">
-  <p><h3>Profile Page</h3></p>
+<div class="ui one column">
+  <div class="ui column row">
+    <p><h3 class="ui segment">Welcome <%= oneUser.userFirstName %></h3></p>
 </div>
 
-  <div class="ui one column">
-    <h3 class="space">Welcome <%= oneUser.userFirstName %></h3>
-  </div>
-
-<div class="ui two column centered grid">
+<div class="ui column centered grid">  
   <div class="four column centered row">
+    
     <div class="column">
       <p><img class="ui small rounded image" src="<%= oneUser.userImage %>" alt="user image"></p>
       <a href="/users/<%= id %>/edit" class="compact mini ui black labeled button">Edit Profile</a>
     </div>
+    
     <div class="column">      
       <form action='/users/<%= id %>/search'>
-        <div>
-          <p>
-            <input type="text" name="term" autofocus placeholder="term">
-          </p>
-          <p>
-            <input type="text" name="location" placeholder="location">
-          </p>
-          <p>
-            <input type="submit" value="Search" class="ui green labeled button">
-          </p>
-        </div>
+        <p>
+          <input type="text" name="term" autofocus placeholder="term">
+        </p>
+        <p>
+          <input type="text" name="location" placeholder="location">
+        </p>
+        <p>
+          <input type="submit" value="Search" class="ui green labeled button">
+        </p>
       </form>
     </div>
+  
   </div>
 </div>
+
+<div class="ui two column centered grid">  
+<div class="column">
+    <table class="ui table segment">
+      <thead>
+        <tr><h3>Favorites</h3></tr>
+        <tr>
+          <th>Bussiness</th>
+          <th></th>
+          <th>No. of Reviews</th>
+          <th>Rating</th>
+          <th>Location</th>
+          <th>Distance</th>
+          <th>My Comments</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td id="favName">
+            <p>favName</p>
+          </td>
+          <td id="favImage">
+            <p>favImage</p>
+          </td>
+          <td id="favReviewCount">
+            <p>favReviewCounte</p>
+          </td>
+          <td id="favRating">
+            <p>favRating</p>
+          </td>
+
+          <td id="favAddress">
+            <p>favAddress</p>
+          </td>
+          <td id="favDistance">
+            <p>favDistance</p>
+          </td>
+          <td>   
+           <p>edit/new comment</p>
+         </td>
+       </tr> 
+     </tbody>
+   </table>
+ </div>
 
 
 

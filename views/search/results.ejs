@@ -1,15 +1,19 @@
 <% include ../partials/loggedInHeader %>
 
-<div>
-	<p>
-		<h3>Your Results for <%= term %></h3>
-	</p>
+
+
+<div class="ui one column">
+  <div class="ui column row">
+    <p>
+  	  <h3 class="ui segment">Results for "<%= term %>"</h3>
+    </p>
+  </div>
 </div>
 
-
-
-</div>
-<table class="ui table segment">
+<div class="ui two column centered grid"> 
+<div class="ui one column">
+	
+ <table class="ui table segment">
 	<thead>
 		<tr>
 		  <th>Bussiness</th>
@@ -18,7 +22,8 @@
 			<th>Rating</th>
 			<th>Location</th>
 			<th>Distance</th>
-			<th>Favorite</th>
+			<th></th>
+			<th></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -45,15 +50,25 @@
 			</td>
 			<td>   
 				<form id="favorite" action="/users/<%= data.id %>/favorites/" method="POST">
-					<input  type="submit" value="Favorite" class="ui blue labeled button">
+					<input  id="favorited" type="submit" value="Favorite" class="ui blue labeled button">
 					<input type="hidden" name="business[name]" value="<%= business.name %>">
 					<input type="hidden" id="data" value="<%= id %>">
 					</form>
+			</td>
+			<td>
+			  
+			  <form id="comment" action="/users/<%= data.id %>/favorites/" method="POST">
+				  <input  id="comment" type="submit" value="Add Note" class="ui purple labeled button">
+				  <textarea name="textarea" id="comment" cols="20" rows="5" style="display:none">Write Note</textarea>
+				</form>
 			</td>
 			</tr>
 			<% }); %> 
 		</tbody>
 	</table>
-	<div> 
+
+  </div>
+</div>
+
 
 <% include ../partials/loggedInFooter %>

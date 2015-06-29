@@ -131,7 +131,7 @@ app.get('/users/:id/search', routeMiddleware.ensureLoggedIn, function(req, res){
 			} else if (results) {
 				userData = db.User.findById(req.session.id, function(err, foundUser){
 				console.log(foundUser); 
-				var data = "hello"
+				//var data = "hello"
 				console.log("first item from yelp API returned: " + results.businesses[0].name)
 				res.render("search/results", {results:results, term:term, id:req.session.id, data:userData});
 				})
@@ -178,7 +178,7 @@ app.get('/users/:id/favorites', routeMiddleware.ensureLoggedIn, function(req, re
 //CREATE favorite from AJAX in searches.js and form in results.ejs page 
 app.post('/users/:user_id/favorites', function (req, res){
 	var favData = req.body.fav
-	db.User.create(
+	db.User.create( //this should be Favorite??
 	{
 		user: req.params.user_id, 
 		favAddress: favData.address, 
@@ -194,7 +194,15 @@ app.post('/users/:user_id/favorites', function (req, res){
 		});
 }); 
 
+//CREATE from AJAX in searches.js and form in results.ejs page 
+// app.post('/favorites/:id/comments', function (req, res){
+// 	var commentData = req.body.comm; 
+// 	db.User.create(
+// 	{
 
+// 	})
+
+// })
  
 
 
