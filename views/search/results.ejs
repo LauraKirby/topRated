@@ -3,71 +3,72 @@
 
 
 <div class="ui one column">
-  <div class="ui column row">
-    <p>
-  	  <h3 class="ui segment">Results for "<%= term %>"</h3>
-    </p>
-  </div>
+	<div class="ui column row">
+		<p>
+			<h3 class="ui segment">Results for "<%= term %>"</h3>
+		</p>
+	</div>
 </div>
 
 <div class="ui two column centered grid"> 
-<div class="ui one column">
-	
- <table class="ui table segment">
-	<thead>
-		<tr>
-		  <th>Bussiness</th>
-		  <th></th>
-		  <th>No. of Reviews</th>
-			<th>Rating</th>
-			<th>Location</th>
-			<th>Distance</th>
-			<th></th>
-			<th></th>
-		</tr>
-	</thead>
-	<tbody>
-		<% results.businesses.forEach(function(business){ %>
-		<tr>
-			<td id="favName">
-			  <a href="<%= business.url %>" > <%= business.name %> </a>  
-			</td>
-			<td id="favImage">
-			  <img class="ui small rounded image" src="<%= business.image_url %>" alt="Business Image">
-			</td>
-			<td id="favReviewCount">
-			  <%= business.review_count %>
-			</td>
-			<td id="favRating">
-			  <%= business.rating %>
-			</td>
+	<div class="column">
 
-			<td id="favAddress">
-			  <%= business.location.address %>
-			</td>
-			<td id="favDistance">
-			  <%= business.distance %>
-			</td>
-			<td>   
-				<form id="favorite" action="/users/<%= data.id %>/favorites/" method="POST">
-					<input  id="favorited" type="submit" value="Favorite" class="ui blue labeled button">
-					<input type="hidden" name="business[name]" value="<%= business.name %>">
-					<input type="hidden" id="data" value="<%= id %>">
-					</form>
-			</td>
-			<td>
-			  
-			  <form id="comment" action="/users/<%= data.id %>/favorites/" method="POST">
-				  <input  id="comment" type="submit" value="Add Note" class="ui purple labeled button">
-				  <textarea name="textarea" id="comment" cols="20" rows="5" style="display:none">Write Note</textarea>
-				</form>
-			</td>
-			</tr>
-			<% }); %> 
-		</tbody>
-	</table>
+		<table class="ui table segment">
+			<thead>
+				<tr>
+					<th>Bussiness</th>
+					<th></th>
+					<th>No. of Reviews</th>
+					<th>Rating</th>
+					<th>Location</th>
+					<th><p></p></th>
+					<th><p></p></th>
+				</tr>
+			</thead>
+			<tbody>
+				<% results.businesses.forEach(function(business){ %>
+				<tr>
+					<td id="favName">
+						<a href="<%= business.url %>" > <%= business.name %> </a>  
+					</td>
+					<td id="favImage">
+						<img class="ui small rounded image" src="<%= business.image_url %>" alt="Business Image">
+					</td>
+					<td id="favReviewCount">
+						<%= business.review_count %>
+					</td>
+					<td id="favRating">
+						<%= business.rating %>
+					</td>
 
-  </div>
+					<td id="favAddress">
+						<%= business.location.address %>
+					</td>
+					<td>   
+						<form id="favorite" action="/users/<%= data.id %>/favorites/" method="POST">
+						<input  id="favorited" type="submit" value="Favorite" class="compact mini ui blue labeled button">
+							<input type="hidden" name="business[name]" value="<%= business.name %>">
+							<input type="hidden" id="data" value="<%= id %>">
+						</form>
+					</td>
+					<td>
+
+						<form id="comment" action="/users/<%= data.id %>/favorites/" method="POST">
+							<input  id="comment" type="submit" value="Add Note" class="compact mini ui purple labeled button">
+							<textarea name="textarea" id="comment" cols="20" rows="5" style="display:none">Write Note</textarea>
+						</form>
+					</td>
+				</tr>
+				<% }); %> 
+			</tbody>
+			<tfoot>
+			  <tr><th colspan="7">
+			    <div class="ui green labeled button">More</div>
+			  </th>
+			</tr></tfoot>
+		</table>
+
+	</div>
 </div>
 
 
