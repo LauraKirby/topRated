@@ -178,7 +178,7 @@ app.get('/users/:id/favorites', routeMiddleware.ensureLoggedIn, function(req, re
 //CREATE favorite from AJAX in searches.js and form in results.ejs page 
 app.post('/users/:user_id/favorites', function (req, res){
 	var favData = req.body.fav
-	db.User.create( //this should be Favorite??
+	db.Favorite.create( //this should be Favorite??
 	{
 		user: req.params.user_id, 
 		favAddress: favData.address, 
