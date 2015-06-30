@@ -57,7 +57,7 @@ app.post('/login', function(req, res) { //do not need middleware bc of authentic
 
 //Signup - show sign up form
 app.get('/signup', function(req, res){
-	res.render("users/signup")
+	res.render("users/signup");
 });
 
 //CREATE User -- Send data to server 
@@ -71,10 +71,10 @@ app.post('/signup', function(req, res){ //does the route name really matter (oth
 			console.log(err);
 		} else if (savedUser){
 			req.login(savedUser); //user is now logged in, we have access to req.session.id
-			res.redirect('/users/' + req.session.id)
+			res.redirect('/users/' + req.session.id);
 		} 													
 		else {
-			console.log("something else happend")
+			console.log("something else happend");
 		}
 	});
 });
@@ -91,8 +91,8 @@ app.get('/users/:user_id', routeMiddleware.ensureLoggedIn, function(req, res){
 app.get('/users/:user_id/edit', routeMiddleware.ensureLoggedIn, function(req, res){
 	db.User.findById(req.params.user_id, 
 		function(err, user){
-			console.log(req.session.id)
-			res.render("users/edit", {user:user, id: req.session.id})
+			console.log(req.session.id);
+			res.render("users/edit", {user:user, id: req.session.id});
 		});
 });
 
@@ -102,7 +102,7 @@ app.put('/users/:user_id', routeMiddleware.ensureLoggedIn, function(req, res){
 		if(err){
 			if (err)throw err; 
 		} else {
-			res.redirect("/users/" + req.session.id)
+			res.redirect("/users/" + req.session.id);
 		}
 	});
 });
@@ -133,9 +133,9 @@ app.get('/users/:user_id/search', routeMiddleware.ensureLoggedIn, function(req, 
 				//console.log("A FOUND USER" + foundUser); //works, foundUser is an object
 				var id = req.session.id; 
 				//console.log("this is the id " + id) //works
-				console.log("first returned item from the Yelp API: " + results.businesses[0].name)
+				console.log("first returned item from the Yelp API: " + results.businesses[0].name);
 				res.render("search/results", {results:results, term:term, id:id});
-				})
+				});
 			}
 			//console.log(results)
 			//res.send(results)
@@ -157,8 +157,8 @@ app.get('/users/:user_id/favorites', routeMiddleware.ensureLoggedIn, function(re
 			function(err, favoritesByUserId){
 				if (err) throw err; 
 				user.favorites = favoritesByUserId;
-				console.log("")
-				res.render('favorites/index', {user:user, id:req.session.id})
+				console.log("");
+				res.render('favorites/index', {user:user, id:req.session.id});
 		});
 	});
 });
@@ -179,7 +179,7 @@ app.get('/users/:user_id/favorites', routeMiddleware.ensureLoggedIn, function(re
 
 //CREATE favorite from AJAX in searches.js and form in results.ejs page 
 app.post('/users/:user_id/favorites', function (req, res){
-	var favData = req.body.fav
+	var favData = req.body.fav;
 	db.Favorite.create( //this should be Favorite??
 	{
 		user: req.params.user_id, 
@@ -190,10 +190,10 @@ app.post('/users/:user_id/favorites', function (req, res){
 		function (err, savedFav){
 			//  if (err) thow err
 			if (err) {
-				console.log("savedFav ERROR" + err) 
+				console.log("savedFav ERROR" + err);
 			} else {
 				res.json({savedFav:savedFav}); 
-				console.log("this is the saved fav" + savedFav)
+				console.log("this is the saved fav" + savedFav);
 			}
 		});
 }); 
