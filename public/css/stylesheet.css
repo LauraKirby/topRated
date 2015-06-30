@@ -11,6 +11,15 @@ h1 {
 	margin-bottom: 10px; 
 }
 
+#login{
+	padding: 10px;
+	margin-top: 10px; 
+	margin-right: 20px;
+	margin-left: 20px; 
+	margin-bottom: 10px; 
+}
+
+
 .button {
 	margin-top: 10px; 
 	margin-right: 20px;
@@ -18,3 +27,66 @@ h1 {
 	margin-bottom: 10px; 
 
 }
+
+.row {
+	background-color: blue; 
+	height: 40px; 
+	width: 40px; 	
+}
+
+
+.a {
+	background-color: Lime; 
+	height: 150px;
+	padding: 20px;
+}
+
+.aa {
+	background-color: Orange; 
+	height: 120px;
+	padding: 5px; 
+}
+
+.aaa {
+	background-color: Red; 
+	height: 70px;
+	padding: 5px; 
+}
+
+.bbb {
+	background-color: Green; 
+	height: 70px;
+	padding: 5px;
+}
+
+.eee {
+	background-color: Blue; 
+	height: 70px;
+	padding: 5px;
+}
+
+.aaaa {
+	background-color: MediumPurple; 
+	height: 70px;
+	padding: 5px;
+}
+
+.bbbb {
+	background-color: DarkOrchid; 
+	height: 70px;
+	padding: 5px;
+}
+
+.cccc {
+	background-color: DarkViolet; 
+	height: 70px;
+	padding: 5px;
+}
+
+.dddd {
+	background-color: Indigo; 
+	height: 70px;
+	padding: 5px;
+}
+
+

@@ -5,32 +5,50 @@
 </div>
 
 
-<div class="ui eight column grid">
+<div class="ui eight column grid a">
 		
-  <div class="row three column wide">
-    <div class="column"></div>
-		<div class="column"></div>
-	  <div class="column">			  
-		    <% if (errorStr != undefined)  { %>
-			  	  <p> <%= errorStr %> </p> 
-			           <% } %></div>
+  <div class="row three column wide aa">
+    
+
+    <div class="column aaa">
+        <% if (errorStr != undefined)  { %>
+    	  	  <p> <%= errorStr %> </p> 
+    	           <% } %>
+    	  <form action="/login" method="POST">
+    </div>
+
+
+		
+		<div class="column bbb ">
+
+		      <div class="column aaaa">
+		          <input class="login" type="text" name="user[email]" placeholder="Email" value="">
+		      </div>
+
+		      <div class="column bbbb">
+		          <input class="login" type="password" name="user[password]" placeholder="Pwd" value="">
+		      </div>
+
+		      <div class="column cccc">
+		          <input id="login" type="submit" value="Login" class="ui green labeled button">
+		          </form>
+		      </div>
+
+		      <div class="column dddd">
+		          <a id='login' href="/signup" class="ui pink labeled button">or sign-up</a>		    	
+		      </div>
+
+		</div>
+	  
+	  
+	  <div class="column eee">			  
+	  </div>
+	
+
+
 	</div>	  
 
-  <div class="five column wide">
-        <form action="/login" method="POST">
-				<div class="column"><input class="login" type="text" name="user[email]" placeholder="Email" value=""></div>
-				<div class="column"></div>
-				
-				<div class="column">
-				  <div class="field">
-					  <input class="login" type="password" name="user[password]" placeholder="Pwd" value="">
-				  </div>
-				 </div>
-				
-				<div class="column"><input type="submit" value="Login" class="ui green labeled button"></div>
-				</form>
-				<div class="column"><a href="/signup" class="logon ui pink labeled button">or sign-up</a></div>
-  </div>
+
 
 
 </div>
