@@ -1,30 +1,41 @@
 <% include ../partials/loggedInHeader %>
 
-<div>
-	<h3> <%= user.name %>'s Favorites</h3>
+<div class="ui one column">
+	<div class="ui column row">
+		<p>
+			<h3 class="ui segment"><%= user.name %>'s Favorites</h3>
+		</p>
+	</div>
 </div>
 
-<div>
-	<table>
-	  <thead>
-	  	<tr>
-	  		<th>Bussiness</th>
-	  		<th></th>
-	  		<th>Yelp Rating</th>
-	  	</tr>
-	  </thead>
-	    <tbody>
-	    <% user.favorites.forEach(function(favorite){ %>
-	      <tr>
-	        	<td><%= favorite.favName %></td>
-	        	<%})%>
-	          
-	      </tr>
-	    </tbody>
-		
-
-
-	</table>
+<div class="ui two column centered grid"> 
+	<div class="column">
+		<table class="ui table segment">
+			<thead>
+				<tr>
+					<th>Bussiness</th>
+					<th>Image</th>
+					<th>Yelp Rating Count</th>
+					<th>My Comments</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% user.favorites.forEach(function(favorite){ %>
+				<tr>
+					<td><%= favorite.favName %></td>
+					<th><%= favorite.favImage %></th>
+					<td><%= favorite.favReviewCount %></td>
+					<td>N/A</td>
+				</tr>
+				  <%})%>
+			</tbody>
+			<tfoot>
+			  <tr><th colspan="7">
+			    <div class="compact mini ui black labeled button">Edit</div>
+			  </th>
+			</tr></tfoot>
+		</table>
+	</div>
 </div>
 
 <% include ../partials/loggedInFooter %>

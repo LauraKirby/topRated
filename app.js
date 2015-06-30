@@ -80,16 +80,16 @@ app.post('/signup', function(req, res){ //does the route name really matter (oth
 });
 
 //SHOW User - Profile Page
-app.get('/users/:id', routeMiddleware.ensureLoggedIn, function(req, res){
-	db.User.findById(req.params.id, function(err, oneUser){
+app.get('/users/:user_id', routeMiddleware.ensureLoggedIn, function(req, res){
+	db.User.findById(req.params.user_id, function(err, oneUser){
 		if (err) throw err;
 		res.render('users/show', {oneUser:oneUser, id: req.session.id}); 
 	});
 });
 
 //EDIT User 
-app.get('/users/:id/edit', routeMiddleware.ensureLoggedIn, function(req, res){
-	db.User.findById(req.params.id, 
+app.get('/users/:user_id/edit', routeMiddleware.ensureLoggedIn, function(req, res){
+	db.User.findById(req.params.user_id, 
 		function(err, user){
 			console.log(req.session.id)
 			res.render("users/edit", {user:user, id: req.session.id})
@@ -97,8 +97,8 @@ app.get('/users/:id/edit', routeMiddleware.ensureLoggedIn, function(req, res){
 });
 
 //UPDATE	User
-app.put('/users/:id', routeMiddleware.ensureLoggedIn, function(req, res){
-	db.User.findByIdAndUpdate(req.params.id, req.body.user, function(err, user){
+app.put('/users/:user_id', routeMiddleware.ensureLoggedIn, function(req, res){
+	db.User.findByIdAndUpdate(req.params.user_id, req.body.user, function(err, user){
 		if(err){
 			if (err)throw err; 
 		} else {
@@ -108,7 +108,7 @@ app.put('/users/:id', routeMiddleware.ensureLoggedIn, function(req, res){
 });
 
 //LOGOUT
-app.get('/users/:id/logout', function(req, res){
+app.get('/users/:user_id/logout', function(req, res){
 	req.logout(); 
 	res.redirect("/"); 
 });
@@ -117,7 +117,7 @@ app.get('/users/:id/logout', function(req, res){
 //------------------- YELP ROUTES -------------------------------//
 
 //Search
-app.get('/users/:id/search', routeMiddleware.ensureLoggedIn, function(req, res){
+app.get('/users/:user_id/search', routeMiddleware.ensureLoggedIn, function(req, res){
 	var term = req.query.term;
 	yelp.search({
 		term: term, 
@@ -153,10 +153,11 @@ app.get('/users/:id/search', routeMiddleware.ensureLoggedIn, function(req, res){
 app.get('/users/:user_id/favorites', routeMiddleware.ensureLoggedIn, function(req, res){
 	db.User.findById(req.params.user_id).exec(function(err, user){
 		if (err) throw err;
-		db.Favorite.find({user: req.params.user_id}, 
+		db.Favorite.find({user: req.params.user_id}, //can i do, find by id and just use req.params.user_id so that i get the entire object. i want access to user.name
 			function(err, favoritesByUserId){
 				if (err) throw err; 
 				user.favorites = favoritesByUserId;
+				console.log("")
 				res.render('favorites/index', {user:user, id:req.session.id})
 		});
 	});
@@ -184,6 +185,7 @@ app.post('/users/:user_id/favorites', function (req, res){
 		user: req.params.user_id, 
 		favAddress: favData.address, 
 		favReviewCount: favData.reviewCount
+
 	}, 
 		function (err, savedFav){
 			//  if (err) thow err
@@ -191,6 +193,7 @@ app.post('/users/:user_id/favorites', function (req, res){
 				console.log("savedFav ERROR" + err) 
 			} else {
 				res.json({savedFav:savedFav}); 
+				console.log("this is the saved fav" + savedFav)
 			}
 		});
 }); 
@@ -214,7 +217,21 @@ app.get('*', function(req,res){
 });
 
 // START SERVER
-app.listen(3000, function(){
-  "Server is listening on port 3000";
+app.listen(proccess.env.PORT || 3000, function(){
+  "Server is listening";
 });
+
+
+ 
+/* 
+TO DO: 
+edit button - favorites - index.ejs
+view more - results - results.ejs 
+implement user authority - app.js
+fix err with url not clearing data
+comment button - results - results.ejs - when button clicked show text, use an AJAX call within searches.js
+
+*/
+
+
 

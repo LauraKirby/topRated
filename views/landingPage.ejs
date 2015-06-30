@@ -1,34 +1,42 @@
 <% include ./partials/landingHeader %>
 
 <div class="ui segment">
-  <p><h3>Website Landing Page</h3></p>
-</div>
-
-<% if (errorStr != undefined)  { %>
-	<div class="error"><%= errorStr %></div>
-<% } %>
-
-<div>
-  <form action="/login" method="POST">
-		<div>
-
-		<label for="password">Email:</label>
-			<input type="text" name="user[email]" placeholder="Email" value="">
-		</div>
-		<div>
-			<label for="password">Password:</label>
-			<input type="password" name="user[password]" placeholder="Password" value="">
-		</div>
-		<p>
-		  <div>
-		  		<input type="submit" value="Login" class="ui green labeled button">
-		  </div>			
-		</p>
-		<div>
-		  	<a href="/signup" class="ui pink labeled button">or sign-up</a> 
-		</div>
-	</form>
+	<p><h1>Top Rated</h1></p>
 </div>
 
 
-<% include ./partials/landingFooter %>
+<div class="ui eight column grid">
+		
+  <div class="row three column wide">
+    <div class="column"></div>
+		<div class="column"></div>
+	  <div class="column">			  
+		    <% if (errorStr != undefined)  { %>
+			  	  <p> <%= errorStr %> </p> 
+			           <% } %></div>
+	</div>	  
+
+  <div class="five column wide">
+        <form action="/login" method="POST">
+				<div class="column"><input class="login" type="text" name="user[email]" placeholder="Email" value=""></div>
+				<div class="column"></div>
+				
+				<div class="column">
+				  <div class="field">
+					  <input class="login" type="password" name="user[password]" placeholder="Pwd" value="">
+				  </div>
+				 </div>
+				
+				<div class="column"><input type="submit" value="Login" class="ui green labeled button"></div>
+				</form>
+				<div class="column"><a href="/signup" class="logon ui pink labeled button">or sign-up</a></div>
+  </div>
+
+
+</div>
+
+
+
+
+
+	<% include ./partials/landingFooter %>
