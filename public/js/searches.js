@@ -10,19 +10,20 @@ $(function(){
 		//use .find()
 		console.log($(this).parent()); 
 		var user = $(this).find('.data').val(); //can we move through all levels of the tree? with .find()
-		var businessId = $(this).find('.busId').val(); 
-		var busName = $(this).find('.busName').val(); 
-		var businessUrl = $(this).find('.busUrl').val(); 
-		var busImage = $(this).find('.busImage').val(); 
-		var reviewCount = $(this).find('.reviewCount').val(); 
-		var rating = $(this).find('.rating').val(); 
-		var address = $(this).find('.address').val(); 
+		var businessId = $(this).find('.yelpBusId').val();
+		var busName = $(this).parent().parent().find('.busName').html(); 
+		var businessUrl = $(this).parent().parent().find('.busUrl').html(); 
+		var busImage = $(this).parent().parent().find('.busImage').html(); 
+		var reviewCount = $(this).parent().parent().find('.reviewCount').html(); 
+		var rating = $(this).parent().parent().find('.rating').html(); 
+		var address = $(this).parent().parent().find('.address').html(); 
 		console.log("this is reviewCount " + reviewCount);
 		//user this.find() instead
 		//$(this).parent().sibling('td').sibling('.favReviewCount').val(); 
 		var favData = {fav: 
 			{
-				busId: businessId,
+				user: user, 
+				yelpBusId: businessId,	
 				favName: busName, 
 				favUrl: businessUrl,  
 				favImage: busImage, 
@@ -32,10 +33,11 @@ $(function(){
 			}
 		};
 		//REVIEW COUNT NOT WORKING HERE <<<<<<<<<--------------
-		console.log("favData.fav.reviewCount before callback " + favData.fav.favReviewCount);
-		console.log("favData.fav.busId before callback " + favData.fav.busId);
+		console.log("reviewCount " + reviewCount);
+		console.log("busId  " + businessId);
+		console.log("object ", favData);
 		callback(user, favData);
-		console.log("favData.fav.busId " + favData.fav.busId);
+		console.log(favData.fav);
 	}
 
 	function favorited(userFromSD, favDataFromSD){

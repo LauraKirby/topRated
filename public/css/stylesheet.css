@@ -1,92 +1,171 @@
+html, body, div, span, applet, object, iframe, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio {
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+body{
+	background-color: LightBlue;
+	margin: 2%;
+
+}
+
 h1 {
 	font-family: 'Orbitron', sans-serif;
 	text-align: center
 }
 
-.login {
+.addPadding {
 	padding: 10px;
-	margin-top: 10px; 
-	margin-right: 20px;
-	margin-left: 20px; 
-	margin-bottom: 10px; 
 }
 
-#login{
-	padding: 10px;
-	margin-top: 10px; 
-	margin-right: 20px;
-	margin-left: 20px; 
-	margin-bottom: 10px; 
+.landingBackground {
+	background-color: LightBlue; 
+	padding: 20px;
 }
-
-
-.button {
-	margin-top: 10px; 
-	margin-right: 20px;
-	margin-left: 20px; 
-	margin-bottom: 10px; 
-
-}
-
-.row {
-	background-color: blue; 
-	height: 40px; 
-	width: 40px; 	
-}
-
 
 .a {
-	background-color: Lime; 
-	height: 150px;
-	padding: 20px;
+	background-color: LightGreen; 
 }
 
 .aa {
 	background-color: Orange; 
-	height: 120px;
-	padding: 5px; 
+	margin: 1%;
+	padding: 5px;
 }
 
 .aaa {
-	background-color: Red; 
-	height: 70px;
-	padding: 5px; 
+	background-color: Red;
+	height: 90px; 
 }
 
 .bbb {
 	background-color: Green; 
-	height: 70px;
-	padding: 5px;
+
 }
 
-.eee {
+.ccc {
 	background-color: Blue; 
-	height: 70px;
-	padding: 5px;
+	height: 90px;
 }
 
-.aaaa {
-	background-color: MediumPurple; 
+.aaaa{
+	background-color: Purple; 
 	height: 70px;
-	padding: 5px;
 }
 
 .bbbb {
-	background-color: DarkOrchid; 
+	background-color: MediumPurple; 
 	height: 70px;
-	padding: 5px;
+
 }
 
 .cccc {
-	background-color: DarkViolet; 
+	background-color: DarkOrchid; 
 	height: 70px;
-	padding: 5px;
 }
 
 .dddd {
 	background-color: Indigo; 
 	height: 70px;
+}
+
+.profileDiv {
+	background-color: LightBlue; 
+	height: 120px;
+	padding: 15px;
+}
+
+.profileImg {
+	text-align: center;
+}
+
+.aTwo {
+	background-color: LightBlue; 
+	margin: 1%;
 	padding: 5px;
 }
 
+.aaTwo {
+	background-color: LightBlue; 
+	margin: 1%;
+	padding: 5px;
+
+} 
+
+.aaaTwo {
+	background-color: LightBlue; 
+}
+
+.bbbTwo {
+	background-color: LightBlue; 
+}
+
+.aaaaTwo {
+	background-color: LightBlue; 
+	height: 70px;
+}
+
+.bbbbTwo {
+	background-color: LightBlue; 
+	height: 70px;
+
+}
+
+.ccccTwo {
+	background-color: LightBlue; 
+	height: 70px;
+
+}
+
+.ddddTwo {
+	background-color: LightBlue; 
+	height: 70px;
+
+}
+
+.zz {
+	background-color: LightOrange;
+}
+
+.favTable{
+	padding: 5px;
+}
+
+.addSpace{
+	float: left;
+	margin-left: 50px;
+}
+
+.centerIsh {
+	text-align: center;
+	padding:10px;
+}
+
+.lilHeight {
+	height: 100%;
+	background-color: White;
+}
+
+.lilHeightTwo {
+	height: 15px;
+}
+
+.white {
+	background-color: white;
+}
 

@@ -1,11 +1,8 @@
 var mongoose = require("mongoose"); 
 
 var favoriteSchema = new mongoose.Schema({
-	busId: String,
-	user: {
-		type: mongoose.Schema.Types.ObjectId, 
-		ref: "User"
-	},
+	yelpBusId: String,
+	user: String,
 	favName: String, 
 	favUrl: String, 
 	favImage: String, 
@@ -17,3 +14,8 @@ var favoriteSchema = new mongoose.Schema({
 
 var Favorite = mongoose.model("Favorite", favoriteSchema); 
 module.exports = Favorite; 
+
+// {
+// 		type: mongoose.Schema.Types.ObjectId, 
+// 		ref: "User"
+// 	}

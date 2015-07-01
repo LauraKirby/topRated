@@ -1,43 +1,83 @@
 <% include ../partials/loggedInHeader %>
 
-<div class="ui one column">
 
-  <div class="ui column row">
-    <p><h1 class="ui segment">Welcome <%= oneUser.userFirstName %></h1></p>
+
+  
+
+  <div class="ui segment">
+
+    <p><h1>Welcome <%= oneUser.userFirstName %></h1></p> 
   </div>
+
+
+<div class="ui eight column grid aTwo">
+    
+  <div class="row two column wide aaTwo">
+    
+
+    <div class="column aaaTwo">
+          <div class="column profileDiv">
+                <img class="ui small rounded image" src="<%= oneUser.userImage %>" alt="user image">
+          </div>
+
+          <div class="column bbbbTwo">
+              <div class="addSpace">
+                <a href="/users/<%= id %>/edit" class="compact mini ui black labeled button">Edit Profile</a>
+              </div>
+          </div>
+
+          <div class="column ccccTwo">
+          </div>
+
+          <div class="column ddddTwo">       
+          </div>
+    </div>
+
+
+    
+    <div class="column bbbTwo ">
+
+          <div class="column aaaaTwo">
+          </div>
+
+          <div class="column">
+              <form action='/users/<%= id %>/search'>
+               <div class="bbbbTwo centerIsh">
+                  <input class="addPadding" type="text" name="term" autofocus placeholder="term">
+               </div>
+          </div>
+
+          <div class="column">
+              <div class="ccccTwo centerIsh">
+                <input class="addPadding" type="text" name="location" placeholder="location">
+              </div>
+          </div>
+
+          <div class="column">  
+              <div class=" ddddTwo centerIsh">
+                  <input type="submit" value="Search" class="ui green labeled button">    
+              </div>
+              </form>
+          </div>
+
+    </div>
+    
+
+
+  </div>    
 
 </div>
 
 
-  <div class="ui column centered grid">  
-    <div class="two column centered row">
-      
-      <div class="column">
-        <p><img class="ui small rounded image" src="<%= oneUser.userImage %>" alt="user image"></p>
-        <a href="/users/<%= id %>/edit" class="compact mini ui black labeled button">Edit Profile</a>
-      </div>
-      
-      <div class="column">      
-        <form action='/users/<%= id %>/search'>
-          <div class="row">
-            <p><input type="text" name="term" autofocus placeholder="term"></p>
-          </div>
-          <div class="row">
-            <p><input type="text" name="location" placeholder="location"></p>
-          </div>
-          <div class="row">
-            <p><input type="submit" value="Search" class="ui green labeled button"></p>
-          </div>
-        </form>
-      </div>
-    
-   </div>
-  </div>
 
-  <div class="ui two column centered grid">  
-    <div class="column">
 
-      <table class="ui table segment">
+  <div class="ui one column centered grid">  
+    <div class="column" >
+     
+      <div class="favTable">
+        
+      
+      <table class="ui table segment" >
         <thead>
           <tr><h3>Favorites</h3></tr>
           <tr>
@@ -78,6 +118,7 @@
        </tbody>
      </table>
 
+   </div>
  </div>
 </div>
 

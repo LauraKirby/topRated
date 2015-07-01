@@ -1,11 +1,19 @@
 <% include ./partials/landingHeader %>
 
-<div class="ui segment">
-	<p><h1>Top Rated</h1></p>
-</div>
+<div class="landingBackground">
+	
 
+		<div class="ui blue inverted segment">
+			
+			<h1>Top Rated</h1>
+				
+			</div>
+				
+
+		<div class="lilHeightTwo"></div>
 
 <div class="ui eight column grid a">
+			
 		
   <div class="row three column wide aa">
     
@@ -21,40 +29,43 @@
 		
 		<div class="column bbb ">
 
-		      <div class="column aaaa">
-		          <input class="login" type="text" name="user[email]" placeholder="Email" value="">
+		      <div class="column">
+		          <div class="centerIsh aaaa">
+		          	<input class="addPadding" type="text" name="user[email]" placeholder="Email" value="">
+		          </div>
 		      </div>
 
-		      <div class="column bbbb">
-		          <input class="login" type="password" name="user[password]" placeholder="Pwd" value="">
+		      <div class="column">
+		          <div class='bbbb centerIsh'>
+		          	<input class="addPadding" type="password" name="user[password]" placeholder="Pwd" value="">
+		          </div>
 		      </div>
 
-		      <div class="column cccc">
-		          <input id="login" type="submit" value="Login" class="ui green labeled button">
-		          </form>
+		      <div class="column">
+		          <div class="cccc centerIsh">
+		          	<input type="submit" value="Login" class="ui green labeled button">
+		            </form>
+		          </div>
 		      </div>
 
-		      <div class="column dddd">
-		          <a id='login' href="/signup" class="ui pink labeled button">or sign-up</a>		    	
+		      <div class="column">
+		        <div class="dddd centerIsh">
+		        	<a href="/signup" class="ui pink labeled button">or sign-up</a>
+		        </div>
+		    	
 		      </div>
 
 		</div>
 	  
 	  
-	  <div class="column eee">			  
+	  <div class="column ccc">			  
 	  </div>
 	
-
-
 	</div>	  
-
-
-
 
 </div>
 
-
-
+</div>
 
 
 	<% include ./partials/landingFooter %>

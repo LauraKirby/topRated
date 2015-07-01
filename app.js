@@ -178,15 +178,16 @@ app.get('/users/:user_id/favorites', routeMiddleware.ensureLoggedIn, function(re
 // });
 
 //CREATE favorite from AJAX in searches.js and form in results.ejs page 
-app.post('/users/:user_id/favorites', function (req, res){
+app.post('/users/:user_id/favorites', routeMiddleware.ensureLoggedIn, function (req, res){
 	var favData = req.body.fav;
-	db.Favorite.create( //this should be Favorite??
-	{
-		user: req.params.user_id, 
-		favAddress: favData.address, 
-		favReviewCount: favData.reviewCount
+	db.Favorite.create(favData,
+	// {
+	// 	user: req.params.user_id, 
+	// 	favAddress: favData.favAddress, 
+	// 	favReviewCount: favData.favReviewCount,
+	// 	favName: favData.favName
 
-	}, 
+	// }, 
 		function (err, savedFav){
 			//  if (err) thow err
 			if (err) {
