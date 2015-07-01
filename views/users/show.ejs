@@ -12,12 +12,13 @@
 
 <div class="ui eight column grid aTwo">
     
-  <div class="row two column wide aaTwo">
+  <div class="row four column wide aaTwo">
     
+    <div class="column aaaTwo"></div>
 
     <div class="column aaaTwo">
           <div class="column profileDiv">
-                <img class="ui small rounded image" src="<%= oneUser.userImage %>" alt="user image">
+                <img class="ui medium rounded image" src="<%= oneUser.userImage %>" alt="user image">
           </div>
 
           <div class="column bbbbTwo">
@@ -32,6 +33,8 @@
           <div class="column ddddTwo">       
           </div>
     </div>
+
+
 
 
     
@@ -69,59 +72,39 @@
 </div>
 
 
+<!-- 
+ <div class="ui one column centered">
+  
+  <div class="ui column row addPadding">
+      <h1 class="ui segment"><%= oneUser.userFirstName %>'s Favorites</h1>
+
+    <table class="ui table segment">
+      <thead>
+        <tr>
+          <th>Bussiness</th>
+          <th>Image</th>
+          <th>Yelp Rating Count</th>
+          <th>My Comments</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% oneUser.favorites.forEach(function(favorite){ %>
+        <tr>
+          <div class="addPadding"> 
+          <td><%= favorite.favName %></td>
+          <td><%- favorite.favImage %></td>
+          <td><%= favorite.favReviewCount %></td>
+          <td>N/A</td>
+          </div>
+        </tr>
+          <%})%>
+      </tbody>
+    </table>
 
 
-  <div class="ui one column centered grid">  
-    <div class="column" >
-     
-      <div class="favTable">
-        
-      
-      <table class="ui table segment" >
-        <thead>
-          <tr><h3>Favorites</h3></tr>
-          <tr>
-            <th>Bussiness</th>
-            <th></th>
-            <th>No. of Reviews</th>
-            <th>Rating</th>
-            <th>Location</th>
-            <th>Distance</th>
-            <th>My Comments</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td id="favName">
-              <p>favName</p>
-            </td>
-            <td id="favImage">
-              <p>favImage</p>
-            </td>
-            <td id="favReviewCount">
-              <p>favReviewCount</p>
-            </td>
-            <td id="favRating">
-              <p>favRating</p>
-            </td>
 
-            <td id="favAddress">
-              <p>favAddress</p>
-            </td>
-            <td id="favDistance">
-              <p>favDistance</p>
-            </td>
-            <td>   
-             <p>edit/view</p>
-           </td>
-         </tr> 
-       </tbody>
-     </table>
-
-   </div>
- </div>
-</div>
-
+  </div>
+ </div> -->
 
 
  <% include ../partials/loggedInFooter %>

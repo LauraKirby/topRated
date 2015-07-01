@@ -83,7 +83,13 @@ app.post('/signup', function(req, res){ //does the route name really matter (oth
 app.get('/users/:user_id', routeMiddleware.ensureLoggedIn, function(req, res){
 	db.User.findById(req.params.user_id, function(err, oneUser){
 		if (err) throw err;
-		res.render('users/show', {oneUser:oneUser, id: req.session.id}); 
+		db.Favorite.find({oneUser: req.params.user_id}, //can i do, find by id and just use req.params.user_id so that i get the entire object. i want access to user.name
+			function(err, favoritesByUserId){
+				if (err) throw err; 
+				oneUser.favorites = favoritesByUserId;
+				console.log("something favorites ", oneUser.favorites[0]);
+				res.render('users/show', {oneUser:oneUser, id:req.session.id});
+		});
 	});
 });
 

@@ -17,7 +17,6 @@ $(function(){
 		var reviewCount = $(this).parent().parent().find('.reviewCount').html(); 
 		var rating = $(this).parent().parent().find('.rating').html(); 
 		var address = $(this).parent().parent().find('.address').html(); 
-		console.log("this is reviewCount " + reviewCount);
 		//user this.find() instead
 		//$(this).parent().sibling('td').sibling('.favReviewCount').val(); 
 		var favData = {fav: 
@@ -32,12 +31,10 @@ $(function(){
 				favAddress: address,
 			}
 		};
-		//REVIEW COUNT NOT WORKING HERE <<<<<<<<<--------------
 		console.log("reviewCount " + reviewCount);
 		console.log("busId  " + businessId);
 		console.log("object ", favData);
 		callback(user, favData);
-		console.log(favData.fav);
 	}
 
 	function favorited(userFromSD, favDataFromSD){
@@ -53,5 +50,26 @@ $(function(){
 			console.log("inside the DONE function " + this); 
 		}.bind(this));
 	}
+
+////Text box appear for comment
+
+	// $(".comment").submit(function(e){
+	// 	e.preventDefault();
+	// 	$('.commentButton').hide();
+	// 	$('.hiddenField').show(); 
+	// });
+
+
+$( ".add" ).on( "click", function(e) {
+	console.log($(this));
+	e.preventDefault();
+	$(this).hide();
+  $(this).siblings(".textAreaComment").show(); 
+  $(this).siblings('.save').show();
+
+    
+});
+
+
 
 }); //closes initial jQuery function on Line: 1 

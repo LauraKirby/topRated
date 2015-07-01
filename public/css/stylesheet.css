@@ -20,7 +20,6 @@ time, mark, audio {
 
 body{
 	background-color: LightBlue;
-	margin: 2%;
 
 }
 
@@ -43,23 +42,23 @@ h1 {
 }
 
 .aa {
-	background-color: Orange; 
+	background-color: Coral; 
 	margin: 1%;
 	padding: 5px;
 }
 
 .aaa {
-	background-color: Red;
-	height: 90px; 
+	background-color: Crimson;
+	height: 25px; 
 }
 
 .bbb {
-	background-color: Green; 
+	background-color: LightSeaGreen; 
 
 }
 
 .ccc {
-	background-color: Blue; 
+	background-color: LightSlateGray; 
 	height: 90px;
 }
 
@@ -86,12 +85,12 @@ h1 {
 
 .profileDiv {
 	background-color: LightBlue; 
-	height: 120px;
 	padding: 15px;
 }
 
 .profileImg {
 	text-align: center;
+
 }
 
 .aTwo {
@@ -108,16 +107,19 @@ h1 {
 } 
 
 .aaaTwo {
-	background-color: LightBlue; 
+	background-color: LightPurple; 
+	padding: 5px;
 }
 
 .bbbTwo {
 	background-color: LightBlue; 
+	padding: 5px;
 }
 
 .aaaaTwo {
 	background-color: LightBlue; 
 	height: 70px;
+	padding: 5px;
 }
 
 .bbbbTwo {
@@ -142,8 +144,10 @@ h1 {
 	background-color: LightOrange;
 }
 
-.favTable{
-	padding: 5px;
+.addPadding{
+	padding-top: 2%;
+	padding-right: 5%;
+	padding-left: 5%;
 }
 
 .addSpace{
@@ -167,5 +171,34 @@ h1 {
 
 .white {
 	background-color: white;
+}
+
+.showColumn {
+	height: 10px;
+	background-color: DodgerBlue;
+}
+
+.headerBack {
+	background-color: Gold;
+}
+
+.hiddenField {
+	display: none;
+
+}
+
+.save {
+	background-color: lightgreen;
+	color: white;
+	border-radius: 2px;
+}
+
+.add {
+	background-color: lightpurple;
+	color: white;
+	border-radius: 2px;
+}
+
+.textAreaComment{
 }
 

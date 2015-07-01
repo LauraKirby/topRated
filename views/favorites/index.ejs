@@ -1,14 +1,14 @@
 <% include ../partials/loggedInHeader %>
 
-<div class="ui one column">
-	<div class="ui column row">
-		<p>
-			<h3 class="ui segment"><%= user.name %>'s Favorites</h3>
-		</p>
+<div class="ui one column centered">
+	
+	<div class="ui column row addPadding">
+			<h1 class="ui segment"><%= user.userFirstName %>'s Favorites</h1>
 	</div>
 </div>
 
-<div class="ui two column centered grid"> 
+<div class="addPadding"> 
+<div class="ui column centered grid"> 
 	<div class="column">
 		<table class="ui table segment">
 			<thead>
@@ -23,7 +23,7 @@
 				<% user.favorites.forEach(function(favorite){ %>
 				<tr>
 					<td><%= favorite.favName %></td>
-					<th><%- favorite.favImage %></th>
+					<td><%- favorite.favImage %></td>
 					<td><%= favorite.favReviewCount %></td>
 					<td>N/A</td>
 				</tr>
@@ -31,11 +31,12 @@
 			</tbody>
 			<tfoot>
 			  <tr><th colspan="7">
-			    <div class="compact mini ui black labeled button">Edit</div>
+			    
 			  </th>
 			</tr></tfoot>
 		</table>
 	</div>
+</div>
 </div>
 
 <% include ../partials/loggedInFooter %>

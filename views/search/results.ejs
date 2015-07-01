@@ -13,7 +13,7 @@
   <div class="ui one column centered grid">  
     <div class="column" >
      
-      <div class="favTable">
+      <div class="addPadding">
 
 		<table class="ui table segment">
 			<thead>
@@ -23,8 +23,8 @@
 					<th>No. of Reviews</th>
 					<th>Rating</th>
 					<th>Location</th>
-					<th><p></p></th>
-					<th><p></p></th>
+					<th>Favorite</th>
+					<th>Comment</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -45,17 +45,18 @@
 						</form>
 					</td>
 					<td>
-						<form id="comment" action="/users/<%= id %>/favorites/" method="POST">
-							<input type="submit" value="Add Note" class="compact mini ui purple labeled button">
-							<textarea name="textarea" id="comment" cols="20" rows="5" style="display:none">Write Note</textarea>
-						</form>
+						  	<form class="comment" action="/users/<%= id %>/favorites/" method="POST">
+						  	        <button type="submit" class="save hiddenField">Save</button>
+						  	        <textarea class="textAreaComment hiddenField" name="textarea" cols="20" rows="5" placeholder="Add comment"></textarea>
+						            <button type="button" class="add">Add</button>
+						    </form>
 					</td>
 				</tr>
 				<% }); %> 
 			</tbody>
 			<tfoot>
 			  <tr><th colspan="7">
-			    <div class="ui green labeled button">More</div>
+			   <!--  <div class="ui green labeled button">More</div> -->
 			  </th>
 			</tr></tfoot>
 		</table>
