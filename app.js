@@ -137,6 +137,33 @@ app.get('/users/:user_id/search', routeMiddleware.ensureLoggedIn, function(req, 
 			} else if (results) {
 				userData = db.User.findById(req.session.id, function(err, foundUser){
 				//console.log("A FOUND USER" + foundUser); //works, foundUser is an object
+				
+				//COMPLETE LOGIC TO LIST BY MOST REVIEWS, THEN BY HIGHEST RATING
+
+				// var resultsReviewCount = []; 
+				// results.businesses.forEach(function(business){
+				// 	resultsReviewCount.push(business.review_count); 
+				// 	resultsReviewCount.sort(); 
+				// });
+
+    //     var sortArr = [];
+				// function sortResults(obj){
+				// 	obj.arr.sort(function(arr){
+				// 	sortArr.push(arr - arr);
+				// });
+				// }
+
+				// sortedResults(results){
+				// 	re
+				// }
+
+				
+				// console.log(sortResults);
+
+
+
+				// will break code: console.log("resultsReviewCount ", resultsReviewCount);
+				console.log("review count ", results.businesses[0].review_count); 
 				var id = req.session.id; 
 				//console.log("this is the id " + id) //works
 				console.log("first returned item from the Yelp API: " + results.businesses[0].name);
@@ -148,6 +175,8 @@ app.get('/users/:user_id/search', routeMiddleware.ensureLoggedIn, function(req, 
 			
 		});
 });
+
+
 
 //use .sort to put number of reviews from higher to lower
 

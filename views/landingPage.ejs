@@ -1,6 +1,6 @@
 <% include ./partials/landingHeader %>
 
-<div class="landingBackground">
+<div class="paddingCoBack">
 	
 
 		<div class="ui blue inverted segment">
@@ -10,13 +10,9 @@
 		</div>
 				
 
-		<div class="lilHeightTwo"></div>
+<!-- 		<div class="lilHeightTwo"></div> -->
 
-<div class="ui eight column grid centered a">
-
-<div class="one wide column">
-	<div class="showColumn"></div>
-</div>
+<!-- <div class="ui eight column grid centered a">
 
 <div class="one wide column">
 	<div class="showColumn"></div>
@@ -45,10 +41,12 @@
 <div class="one wide column">
 	<div class="showColumn"></div>
 </div>
+
+<div class="one wide column">
+	<div class="showColumn"></div>
+</div> -->
 		
-  <div class="row three column wide aa">
     
-
     <div class="column aaa">
         <% if (errorStr != undefined)  { %>
     	  	  <p> <%= errorStr %> </p> 
@@ -56,19 +54,18 @@
     	  <form action="/login" method="POST">
     </div>
 
-
 		
 		<div class="column bbb ">
 
 		      <div class="column">
-		          <div class="centerIsh aaaa">
-		          	<input class="addPadding" type="text" name="user[email]" placeholder="Email" value="">
+		          <div class='aaaa centerIsh'>
+		          	<input class="addPadding" type="text" value="mail" name="user[email]" placeholder="Email" value="">
 		          </div>
 		      </div>
 
 		      <div class="column">
 		          <div class='bbbb centerIsh'>
-		          	<input class="addPadding" type="password" name="user[password]" placeholder="Pwd" value="">
+		          	<input class="addPadding" type="password" value="laura" name="user[password]" placeholder="Pwd">
 		          </div>
 		      </div>
 
@@ -83,18 +80,17 @@
 		        <div class="dddd centerIsh">
 		        	<a href="/signup" class="ui pink labeled button">or sign-up</a>
 		        </div>
-		    	
 		      </div>
 
 		</div>
 	  
 	  
-	  <div class="column ccc">			  
-	  </div>
+<!-- 	  <div class="column ccc">			  
+	  </div> -->
 	
-	</div>	  
+<!-- 	</div>	 -->  
 
-<div class="one wide column">
+<!-- <div class="one wide column">
 	<div class="showColumn">
 	</div>
 </div>
@@ -126,13 +122,15 @@
 <div class="one wide column">
 	<div class="showColumn"><p></p><p></p></div>
 </div>
+ -->
+
+<!-- </div> -->
+
 
 
 </div>
 
 
-
-</div>
 
 
 	<% include ./partials/landingFooter %>

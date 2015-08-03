@@ -1,6 +1,6 @@
 <% include ../partials/loggedInHeader %>
 
-
+<div class="paddingCoBack">
 
 <div class="ui one column">
 	<div class="ui column row">
@@ -13,7 +13,6 @@
   <div class="ui one column centered grid">  
     <div class="column" >
      
-      <div class="addPadding">
 
 		<table class="ui table segment">
 			<thead>
@@ -36,20 +35,32 @@
 					<td class="rating"><%= business.rating %></td>
 					<td class='address'><%= business.location.address %></td>
 					<td>   
-						<form class="favButton" action="/users/<%= id %>/favorites/" method="POST">
-						<input type="submit" value="Favorite" class="compact mini ui blue labeled button">
+					 <div class="ui form">
+					    <div class="field">
+						    <form class="favButton" action="/users/<%= id %>/favorites/" method="POST">
+						    <input type="submit" value="Favorite" class="compact mini ui grey labeled button">
+						  </div>
 						<input type="hidden" class="yelpBusId" value="<%= business.id %>">
 						<input type="hidden" class="busUrl" value="<%= business.url %>">
 						<input type="hidden" name="business[name]" value="<%= business.name %>">
 						<input type="hidden" class="data" id="data" value="<%= id %>">
 						</form>
+						</div>
 					</td>
 					<td>
-						  	<form class="comment" action="/users/<%= id %>/favorites/" method="POST">
-						  	        <button type="submit" class="save hiddenField">Save</button>
-						  	        <textarea class="textAreaComment hiddenField" name="textarea" cols="20" rows="5" placeholder="Add comment"></textarea>
-						            <button type="button" class="add">Add</button>
-						    </form>
+
+					  <div class="ui form">
+					    <div class="field">
+						  	  <form class="commentForm" action="/users/<%= id %>/favorites/" method="POST">
+						  	    <textarea class="textAreaComment hiddenField" name="textarea" cols="20" rows="5" placeholder="Add comment"></textarea>
+						  	        <p></p>
+						  	    <button id="saveBtn" type="submit" class="compact mini ui green labeled button">Save</button>
+						      </form>
+
+						    <button type="button" class="add compact mini ui pink labeled button">Add</button>
+						  </div>
+						</div>
+					
 					</td>
 				</tr>
 				<% }); %> 
@@ -63,6 +74,5 @@
    </div>
 	</div>
 </div>
-
 
 <% include ../partials/loggedInFooter %>

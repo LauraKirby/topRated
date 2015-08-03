@@ -2,10 +2,10 @@ $(function(){
 
 	$(".favButton").submit(function(e){
 		e.preventDefault();
-		storeFavData.apply(this, [favorited.bind(this)]); 			
+		favData.apply(this, [postFavorite.bind(this)]); 			
 	});
 
-	function storeFavData (callback){
+	function favData (callback){
 		//var favName = $('#favName').val();
 		//use .find()
 		console.log($(this).parent()); 
@@ -19,7 +19,7 @@ $(function(){
 		var address = $(this).parent().parent().find('.address').html(); 
 		//user this.find() instead
 		//$(this).parent().sibling('td').sibling('.favReviewCount').val(); 
-		var favData = {fav: 
+		var favDataObj = {fav: 
 			{
 				user: user, 
 				yelpBusId: businessId,	
@@ -33,11 +33,11 @@ $(function(){
 		};
 		console.log("reviewCount " + reviewCount);
 		console.log("busId  " + businessId);
-		console.log("object ", favData);
+		console.log("object ", favDataObj);
 		callback(user, favData);
 	}
 
-	function favorited(userFromSD, favDataFromSD){
+	function postFavorite(userFromSD, favDataFromSD){
 		console.log($(this));
 		$.ajax({
 			type: 'POST', 
@@ -51,25 +51,29 @@ $(function(){
 		}.bind(this));
 	}
 
-////Text box appear for comment
-
-	// $(".comment").submit(function(e){
-	// 	e.preventDefault();
-	// 	$('.commentButton').hide();
-	// 	$('.hiddenField').show(); 
-	// });
-
-
+// ------------------------- Add & Save Comment -------------------------
 $( ".add" ).on( "click", function(e) {
 	console.log($(this));
 	e.preventDefault();
 	$(this).hide();
-  $(this).siblings(".textAreaComment").show(); 
-  $(this).siblings('.save').show();
-
-    
+  $(this).siblings(".commentForm").children(".textAreaComment").show() //child(".textAreaComment").show(); //
+  $(this).siblings(".commentForm").children("#saveBtn").show();
 });
 
+$(".commentForm").submit(function(e) {
+	console.log($(this, "line 73 from saveBtn click")); 
+	e.preventDefault(); 
+	//var text = $(this).children(".textAreaComment").val();
+	commentData.apply(this);
+});
 
+	function commentData () {
+		var text = $(this).children(".textAreaComment").val();
+		console.log(text);
+	}
+
+	function postComment () {
+
+	}
 
 }); //closes initial jQuery function on Line: 1 

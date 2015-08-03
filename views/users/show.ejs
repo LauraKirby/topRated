@@ -1,9 +1,6 @@
 <% include ../partials/loggedInHeader %>
 
 
-
-  
-
   <div class="ui segment">
 
     <p><h1>Welcome <%= oneUser.userFirstName %></h1></p> 
@@ -44,15 +41,15 @@
           </div>
 
           <div class="column">
-              <form action='/users/<%= id %>/search'>
-               <div class="bbbbTwo centerIsh">
-                  <input class="addPadding" type="text" name="term" autofocus placeholder="term">
+              <form class "ui form" action='/users/<%= id %>/search' >
+               <div class="bbbbTwo centerIsh field">
+                  <input class="addPadding" type="text" name="term" value="food"autofocus placeholder="term">
                </div>
           </div>
 
           <div class="column">
               <div class="ccccTwo centerIsh">
-                <input class="addPadding" type="text" name="location" placeholder="location">
+                <input class="addPadding" type="text" name="location" value="san francisco" placeholder="location">
               </div>
           </div>
 
