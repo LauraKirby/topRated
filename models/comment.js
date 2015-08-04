@@ -1,12 +1,12 @@
 var mongoose = require("mongoose"); 
 
 var commentSchema = new mongoose.Schema({
-	busId: String,
 	user: {
 		type: mongoose.Schema.Types.ObjectId, 
 		ref: "User"
 	},
 	//favName: String, 
+	busId: String,
 	content: String
 });
 

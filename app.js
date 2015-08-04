@@ -199,7 +199,7 @@ app.get('/users/:user_id/favorites', routeMiddleware.ensureLoggedIn, function(re
 
 //CREATE favorite from AJAX
 app.post('/users/:user_id/favorites', routeMiddleware.ensureLoggedIn, function (req, res){
-	var favData = req.body.fav;
+	var favDataObj = req.body.fav;
 	db.Favorite.create(favDataObj,
 		function (err, savedFav){
 			if (err) {
@@ -213,7 +213,7 @@ app.post('/users/:user_id/favorites', routeMiddleware.ensureLoggedIn, function (
 
 //COMMENT - create comment from users/:user_id/search
 app.post('/users/:user_id/comments', function (req, res){
-	var commentData = req.body.comm; 
+	var commDataObj = req.body.comm;
 	db.Comment.create(commDataObj, 
 		function(err, savedComm){
 			if (err){
@@ -235,8 +235,6 @@ app.post('/users/:user_id/comments', function (req, res){
 
 // })
  
-
-
 
 // CATCH ALL
 app.get('*', function(req,res){

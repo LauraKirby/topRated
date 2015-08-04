@@ -2,7 +2,7 @@ $(function(){
 
 var user = $($(".userIdData")[0]).val();
 
-console.log(user);
+console.log(user, " user id from session id");
 
 	$(".favButton").submit(function(e){
 		e.preventDefault();
@@ -10,7 +10,7 @@ console.log(user);
 	});
 
 	function favData (callback){
-		console.log($(this).parent()); 
+		// console.log($(this).parent()); 
 		var businessId = $(this).find('.yelpBusId').val();
 		var busName = $(this).parent().parent().find('.busName').html(); 
 		var businessUrl = $(this).parent().parent().find('.busUrl').html(); 
@@ -63,14 +63,14 @@ $(".commentForm").submit(function(e) {
 });
 
 	function commentData (callback) {
+		var businessId = "test"; 
 		var content = $(this).children(".textAreaComment").val();
-		var businessId = ""; 
-		console.log(content, "commentData function");
+		console.log(content, " ** commentData function");
 		var commDataObj = {comm: 
 			{
 				user: user, 
 				busId: businessId,	
-				commContent: content, 
+				content: content, 
 			}
 		};
 		callback(user, commDataObj);
