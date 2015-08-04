@@ -84,9 +84,10 @@ $(".commentForm").submit(function(e) {
 			url: '/users/' + userFromSD + '/comments',
 			data: commObjFromSD,
 			dataType: 'json'
-		}).done(function(commObjFromSD){
+		}).done(function(commObjSaved){
+			var contentSaved = commObjSaved.savedComm.content; 
 			$(this).hide();
-			$(this).siblings(".hiddenComm").show();
+			$(this).siblings(".hiddenComm").html('<p>' + contentSaved + '</p>').show();
 		}.bind(this));
 	}
 

@@ -172,6 +172,10 @@ h1 {
 
 }
 
+.hiddenComm {
+	display: none;
+}
+
 .save {
 /*	background-color: lightgreen;
 	color: white;

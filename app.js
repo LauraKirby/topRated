@@ -48,7 +48,7 @@ app.post('/login', function(req, res) { //do not need middleware bc of authentic
 				res.render("landingPage", {errorStr: err}); 
 			} else if(!err && user !== null) {
 				req.login(user); 
-				res.redirect("/users/" + user._id); //here we are stating that it is clearly a mongo id
+				res.redirect("/users/" + user._id); //here we are stating that it is clearly a mongo id - should i update to a session id
 			} else {
 				res.render("landingPage", {errorStr: "Error: Could not authenticate"}); 
 			}
@@ -86,7 +86,7 @@ app.get('/users/:user_id', routeMiddleware.ensureLoggedIn, function(req, res){
 			function(err, favoritesByUserId){
 				if (err) throw err; 
 				oneUser.favorites = favoritesByUserId;
-				console.log("something favorites ", oneUser.favorites[0]);
+				// console.log("something favorites ", oneUser.favorites[0]);
 				res.render('users/show', {oneUser:oneUser, id:req.session.id});
 		});
 	});
@@ -96,7 +96,7 @@ app.get('/users/:user_id', routeMiddleware.ensureLoggedIn, function(req, res){
 app.get('/users/:user_id/edit', routeMiddleware.ensureLoggedIn, function(req, res){
 	db.User.findById(req.params.user_id, 
 		function(err, user){
-			console.log(req.session.id);
+			// console.log(req.session.id);
 			res.render("users/edit", {user:user, id: req.session.id});
 		});
 });
@@ -136,36 +136,9 @@ app.get('/users/:user_id/search', routeMiddleware.ensureLoggedIn, function(req, 
 			} else if (results) {
 				userData = db.User.findById(req.session.id, function(err, foundUser){
 				//console.log("A FOUND USER" + foundUser); //works, foundUser is an object
-				
-				//COMPLETE LOGIC TO LIST BY MOST REVIEWS, THEN BY HIGHEST RATING
-
-				// var resultsReviewCount = []; 
-				// results.businesses.forEach(function(business){
-				// 	resultsReviewCount.push(business.review_count); 
-				// 	resultsReviewCount.sort(); 
-				// });
-
-    //     var sortArr = [];
-				// function sortResults(obj){
-				// 	obj.arr.sort(function(arr){
-				// 	sortArr.push(arr - arr);
-				// });
-				// }
-
-				// sortedResults(results){
-				// 	re
-				// }
-
-				
-				// console.log(sortResults);
-
-
-
-				// will break code: console.log("resultsReviewCount ", resultsReviewCount);
-				console.log("review count ", results.businesses[0].review_count); 
 				var id = req.session.id; 
-				//console.log("this is the id " + id) //works
-				console.log("first returned item from the Yelp API: " + results.businesses[0].name);
+				//console.log("this is the id " + id) 
+				//console.log("first returned item from the Yelp API: " + results.businesses[0].name);
 				res.render("search/results", {results:results, term:term, id:id});
 				});
 			}
@@ -176,12 +149,7 @@ app.get('/users/:user_id/search', routeMiddleware.ensureLoggedIn, function(req, 
 });
 
 
-
-//use .sort to put number of reviews from higher to lower
-
-
 //---------------- Favorites -------------------------//
-
 
 //INDEX -- Click "Favorites in Menu Bar" -- See all Favorites
 app.get('/users/:user_id/favorites', routeMiddleware.ensureLoggedIn, function(req, res){
@@ -191,7 +159,6 @@ app.get('/users/:user_id/favorites', routeMiddleware.ensureLoggedIn, function(re
 			function(err, favoritesByUserId){
 				if (err) throw err; 
 				user.favorites = favoritesByUserId;
-				console.log("");
 				res.render('favorites/index', {user:user, id:req.session.id});
 		});
 	});
