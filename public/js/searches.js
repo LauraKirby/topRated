@@ -4,6 +4,7 @@ var user = $($(".userIdData")[0]).val();
 
 console.log(user, " user id from session id");
 
+// ------------------------- Add & Save Favorite -------------------------
 	$(".favButton").submit(function(e){
 		e.preventDefault();
 		favData.apply(this, [postFavorite.bind(this)]); 			
@@ -11,7 +12,7 @@ console.log(user, " user id from session id");
 
 	function favData (callback){
 		// console.log($(this).parent()); 
-		var businessId = $(this).find('.yelpBusId').val();
+		var businessId = $(this).parent().parent().find('.yelpBusId').val();
 		var busName = $(this).parent().parent().find('.busName').html(); 
 		var businessUrl = $(this).parent().parent().find('.busUrl').html(); 
 		var busImage = $(this).parent().parent().find('.busImage').html(); 
@@ -41,9 +42,9 @@ console.log(user, " user id from session id");
 			data: favDataFromSD,
 			dataType: 'json'
 		}).done(function(favDataFromSD){
-			console.log ("inside the DONE function " + userFromSD);
+			//console.log ("inside the DONE function " + userFromSD);
 			$(this).children('input.compact').removeClass("blue").addClass("yellow");
-			console.log("inside the DONE function " + this); 
+			//console.log("inside the DONE function " + this); 
 		}.bind(this));
 	}
 
@@ -52,7 +53,7 @@ $( ".add" ).on( "click", function(e) {
 	console.log($(this));
 	e.preventDefault();
 	$(this).hide();
-  $(this).siblings(".commentForm").children(".textAreaComment").show() //child(".textAreaComment").show(); //
+  $(this).siblings(".commentForm").children(".textAreaComment").show(); 
   $(this).siblings(".commentForm").children("#saveBtn").show();
 });
 
@@ -63,9 +64,9 @@ $(".commentForm").submit(function(e) {
 });
 
 	function commentData (callback) {
-		var businessId = "test"; 
+		var businessId = $(this).parent().parent().parent().parent().find('.yelpBusId').val();
 		var content = $(this).children(".textAreaComment").val();
-		console.log(content, " ** commentData function");
+		//console.log(content, " ** commentData function");
 		var commDataObj = {comm: 
 			{
 				user: user, 
@@ -84,9 +85,8 @@ $(".commentForm").submit(function(e) {
 			data: commObjFromSD,
 			dataType: 'json'
 		}).done(function(commObjFromSD){
-			console.log ("inside the DONE function " + userFromSD);
 			$(this).hide();
-			console.log("inside the DONE function " + this); 
+			$(this).siblings(".hiddenComm").show();
 		}.bind(this));
 	}
 
