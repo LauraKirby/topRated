@@ -80,15 +80,28 @@ app.post('/signup', function(req, res){
 
 //SHOW User - Profile Page
 app.get('/users/:user_id', routeMiddleware.ensureLoggedIn, function(req, res){
+	//within User collection, find a user with user_id and store to oneUser
+	//ensure user exists
 	db.User.findById(req.params.user_id, function(err, oneUser){
 		if (err) throw err;
-		db.Favorite.find({oneUser: req.params.user_id}, //can i do, find by id and just use req.params.user_id so that i get the entire object. i want access to user.name
-			function(err, favoritesByUserId){
-				if (err) throw err; 
+		//within Favorite collection, find key 'user' with property value of 'req.params.user_id'
+		db.Favorite.find({user: req.params.user_id}, 
+			//return favorites in an array and save to 'favoritesByUserId'
+			function(err, favoritesByUserId) {
+				if (err) throw err;
+				//where is the empty array 'favorites' coming from
+				//adding a property to our object. this property will only be available for the scope of this function.
+				//the favorites property will create an association on the user, to access the favorites
 				oneUser.favorites = favoritesByUserId;
-				// console.log("something favorites ", oneUser.favorites[0]);
-				res.render('users/show', {oneUser:oneUser, id:req.session.id});
-		});
+				//console.log(favoritesByUserId);
+				//console.log("one favorite ", oneUser.favorites[0]);
+				db.Comment.find({user: req.params.user_id},
+					function(err, commentsByUserId) {
+						oneUser.comments = commentsByUserId;
+						console.log(commentsByUserId); 	
+						res.render('users/show', {oneUser:oneUser, id:req.session.id});
+					});
+			});
 	});
 });
 
@@ -129,6 +142,7 @@ app.get('/users/:user_id/search', routeMiddleware.ensureLoggedIn, function(req, 
 		location: req.query.location, 
 		limit: 10 
 	}, 
+	//find all where user_id == comments.user_id && comment.businessId == yelp.businessId
 		function(err, results){
 			if (err) {
 				console.log(err); 
@@ -155,6 +169,7 @@ app.get('/users/:user_id/search', routeMiddleware.ensureLoggedIn, function(req, 
 app.get('/users/:user_id/favorites', routeMiddleware.ensureLoggedIn, function(req, res){
 	db.User.findById(req.params.user_id).exec(function(err, user){
 		if (err) throw err;
+		//user below refers to the key within the Favorite model
 		db.Favorite.find({user: req.params.user_id}, //can i do, find by id and just use req.params.user_id so that i get the entire object. i want access to user.name
 			function(err, favoritesByUserId){
 				if (err) throw err; 
