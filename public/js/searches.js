@@ -1,15 +1,16 @@
 $(function(){
 
+var user = $($(".userIdData")[0]).val();
+
+console.log(user);
+
 	$(".favButton").submit(function(e){
 		e.preventDefault();
 		favData.apply(this, [postFavorite.bind(this)]); 			
 	});
 
 	function favData (callback){
-		//var favName = $('#favName').val();
-		//use .find()
 		console.log($(this).parent()); 
-		var user = $(this).find('.data').val(); //can we move through all levels of the tree? with .find()
 		var businessId = $(this).find('.yelpBusId').val();
 		var busName = $(this).parent().parent().find('.busName').html(); 
 		var businessUrl = $(this).parent().parent().find('.busUrl').html(); 
@@ -17,8 +18,6 @@ $(function(){
 		var reviewCount = $(this).parent().parent().find('.reviewCount').html(); 
 		var rating = $(this).parent().parent().find('.rating').html(); 
 		var address = $(this).parent().parent().find('.address').html(); 
-		//user this.find() instead
-		//$(this).parent().sibling('td').sibling('.favReviewCount').val(); 
 		var favDataObj = {fav: 
 			{
 				user: user, 
@@ -31,10 +30,7 @@ $(function(){
 				favAddress: address,
 			}
 		};
-		console.log("reviewCount " + reviewCount);
-		console.log("busId  " + businessId);
-		console.log("object ", favDataObj);
-		callback(user, favData);
+		callback(user, favDataObj);
 	}
 
 	function postFavorite(userFromSD, favDataFromSD){
@@ -63,17 +59,35 @@ $( ".add" ).on( "click", function(e) {
 $(".commentForm").submit(function(e) {
 	console.log($(this, "line 73 from saveBtn click")); 
 	e.preventDefault(); 
-	//var text = $(this).children(".textAreaComment").val();
-	commentData.apply(this);
+	commentData.apply(this, [postComment.bind(this)]);
 });
 
-	function commentData () {
-		var text = $(this).children(".textAreaComment").val();
-		console.log(text);
+	function commentData (callback) {
+		var content = $(this).children(".textAreaComment").val();
+		var businessId = ""; 
+		console.log(content, "commentData function");
+		var commDataObj = {comm: 
+			{
+				user: user, 
+				busId: businessId,	
+				commContent: content, 
+			}
+		};
+		callback(user, commDataObj);
 	}
 
-	function postComment () {
-
+	function postComment(userFromSD, commObjFromSD){
+		console.log($(this));
+		$.ajax({
+			type: 'POST', 
+			url: '/users/' + userFromSD + '/comments',
+			data: commObjFromSD,
+			dataType: 'json'
+		}).done(function(commObjFromSD){
+			console.log ("inside the DONE function " + userFromSD);
+			$(this).hide();
+			console.log("inside the DONE function " + this); 
+		}.bind(this));
 	}
 
 }); //closes initial jQuery function on Line: 1 

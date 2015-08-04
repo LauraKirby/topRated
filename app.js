@@ -61,8 +61,7 @@ app.get('/signup', function(req, res){
 });
 
 //CREATE User -- Send data to server 
-app.post('/signup', function(req, res){ //does the route name really matter (other than it needs to match the button so it is accessed) since we are redirecting? 
-	//maybe the route matters in terms of REST? 
+app.post('/signup', function(req, res){ 
 	var newUser = req.body.user; //"user" is from ejs
 	db.User.create(newUser, function(err, savedUser){ //savedUser refers to the new user created and saved. save has a callback function with (err and newUser)
 		//create saves to database
@@ -198,33 +197,11 @@ app.get('/users/:user_id/favorites', routeMiddleware.ensureLoggedIn, function(re
 	});
 });
 
-//CREATE favorite from results page
-// app.post('/users/:id/favorites', routeMiddleware.ensureLoggedIn, function (req, res){
-// 	var newFav = req.body.business 
-// 	db.Favorite.create({user: req.params.id, favName: newFav.name}, 
-// 		function(err, savedFav){
-// 			if (err){
-// 				console.log(err)
-// 			} else {
-// 				res.redirect('/users/' + req.session.id + '/favorites');
-// 				//res.send(savedFav) //will need to add res.format (3 types)
-// 			} 
-// 	});
-// });
-
-//CREATE favorite from AJAX in searches.js and form in results.ejs page 
+//CREATE favorite from AJAX
 app.post('/users/:user_id/favorites', routeMiddleware.ensureLoggedIn, function (req, res){
 	var favData = req.body.fav;
-	db.Favorite.create(favData,
-	// {
-	// 	user: req.params.user_id, 
-	// 	favAddress: favData.favAddress, 
-	// 	favReviewCount: favData.favReviewCount,
-	// 	favName: favData.favName
-
-	// }, 
+	db.Favorite.create(favDataObj,
 		function (err, savedFav){
-			//  if (err) thow err
 			if (err) {
 				console.log("savedFav ERROR" + err);
 			} else {
@@ -234,7 +211,21 @@ app.post('/users/:user_id/favorites', routeMiddleware.ensureLoggedIn, function (
 		});
 }); 
 
-//CREATE from AJAX in searches.js and form in results.ejs page 
+//COMMENT - create comment from users/:user_id/search
+app.post('/users/:user_id/comments', function (req, res){
+	var commentData = req.body.comm; 
+	db.Comment.create(commDataObj, 
+		function(err, savedComm){
+			if (err){
+				console.log("saved ERROR" + err); 
+			} else {
+				res.json({savedComm:savedComm}); 
+				console.log("this is the saved comment" + savedComm);
+			}
+	 });
+}); 
+
+//COMMENT - create comment from users/:user_id/favorites
 // app.post('/favorites/:id/comments', function (req, res){
 // 	var commentData = req.body.comm; 
 // 	db.User.create(
