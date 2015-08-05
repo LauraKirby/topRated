@@ -94,11 +94,11 @@ app.get('/users/:user_id', routeMiddleware.ensureLoggedIn, function(req, res){
 				//the favorites property will create an association on the user, to access the favorites
 				oneUser.favorites = favoritesByUserId;
 				//console.log(favoritesByUserId);
-				//console.log("one favorite ", oneUser.favorites[0]);
+				console.log("one favorite ", oneUser.favorites[0]);
 				db.Comment.find({user: req.params.user_id},
 					function(err, commentsByUserId) {
 						oneUser.comments = commentsByUserId;
-						console.log(commentsByUserId); 	
+						console.log("one comment", oneUser.comments[0]); 	
 						res.render('users/show', {oneUser:oneUser, id:req.session.id});
 					});
 			});
@@ -153,12 +153,25 @@ app.get('/users/:user_id/search', routeMiddleware.ensureLoggedIn, function(req, 
 				var id = req.session.id; 
 				//console.log("this is the id " + id) 
 				//console.log("first returned item from the Yelp API: " + results.businesses[0].name);
-				res.render("search/results", {results:results, term:term, id:id});
+				db.Favorite.find({user: req.params.user_id}, 
+					//return favorites in an array and save to 'favoritesByUserId'
+					function(err, favoritesByUserId) {
+						if (err) throw err;
+						//where is the empty array 'favorites' coming from
+						//adding a property to our object. this property will only be available for the scope of this function.
+						//the favorites property will create an association on the user, to access the favorites
+						foundUser.favorites = favoritesByUserId;
+						console.log(foundUser.favorites[0]);
+						//console.log("one favorite ", foundUser.favorites[0]);
+						db.Comment.find({user: req.params.user_id},
+							function(err, commentsByUserId) {
+								foundUser.comments = commentsByUserId;
+								console.log(foundUser.comments[0]); 	
+								res.render("search/results", {results:results, foundUser:foundUser, term:term, id:id});
+							});
+					});
 				});
 			}
-			//console.log(results)
-			//res.send(results)
-			
 		});
 });
 
@@ -174,6 +187,7 @@ app.get('/users/:user_id/favorites', routeMiddleware.ensureLoggedIn, function(re
 			function(err, favoritesByUserId){
 				if (err) throw err; 
 				user.favorites = favoritesByUserId;
+				console.log(user.favorites[0]); //why doesn't fav have favImage or reivew count?
 				res.render('favorites/index', {user:user, id:req.session.id});
 		});
 	});

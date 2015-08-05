@@ -29,9 +29,9 @@
 			<tbody>
 				<% results.businesses.forEach(function(business){ %>
 				<tr>
-					<td><p class='busName'> <%= business.name %> </p><a href="<%= business.url %>" > Visit on Yelp </a></td>
-					<td class='busImage'><img class="ui small rounded image" src="<%= business.image_url %>" alt="Business Image"></td>
-					<td class="reviewCount"><%=business.review_count%></td>
+					<td><p> <%= business.name %> </p><a href="<%= business.url %>" > Visit on Yelp </a></td>
+					<td><img class="busImage ui small rounded image" src="<%= business.image_url %>" alt="Business Image"></td>
+					<td class="reviewCount"> <p><%= business.review_count %></p> </td>
 					<td class="rating"><%= business.rating %></td>
 					<td class='address'><%= business.location.address %></td>
 					<td>   
@@ -42,7 +42,8 @@
 						    </div>
 						    <input type="hidden" class="yelpBusId" value="<%= business.id %>">
 						    <input type="hidden" class="busUrl" value="<%= business.url %>">
-						    <input type="hidden" name="business[name]" value="<%= business.name %>">
+						    <input type="hidden" class="busName" name="business[name]" value="<%= business.name %>">
+						    <input type="hidden" class="busImageUrl" value="<%= business.image_url %>">
 						    </form>
 						</div>
 					</td>
@@ -58,6 +59,13 @@
 						  	
 						    <button type="button" class="add compact mini ui pink labeled button">Add</button>
 						   
+						   <div class="ui segments">
+						     <div class="ui segment"><p><% foundUser.comments.forEach(function(comment){ %>
+						         <%= comment.content %>
+
+						     	  <% }) %></p>
+						     </div>
+						   </div>
 						    
 						    <div class="ui segments hiddenComm">
 						      <div class="ui segment">

@@ -1,30 +1,32 @@
 <% include ../partials/loggedInHeader %>
-
+<div class="paddingCoBack">
 <div class="ui segment">
   <p><h1>Edit Profile</h1></p>
 </div>
 
 <div>
- <form action="/users/<%= user.id %>?_method=put" method="POST"> 
-	<div>
+ <form action="/users/<%= user.id %>?_method=put" method="POST" class="ui form"> 
+	<div class="field">
 		<label for="nameFirstName">User Name: </label>
 		<input type="text" name="user[userFirstName]" class="form-control" value="<%= user.userFirstName %>" autofocus>
 	</div>
-	<div>
+	<div class="field">
 		<label for="userImage">Image:</label>
 		<input type="text" name="user[userImage]" class="form-control" value="<%= user.userImage %>">
 	</div>
-	<div>
+	<div class="field">
 		<label for="score">Email:</label>
 		<input type="text" name="user[email]" id="" class="form-control" value="<%= user.email %>">
 	</div>
 	<div>
 		<p></p>
 	</div>
-	<div class="form-group">
+	<div class="field">
 	  <input type="submit" value="Save" class ="btn btn-info">
 	</div>
 </form>
+</div>
+
 </div>
 
 <% include ../partials/loggedInFooter %>
