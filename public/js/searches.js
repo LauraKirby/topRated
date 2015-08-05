@@ -15,7 +15,7 @@ console.log(user, " user id from session id");
 		var businessId = $(this).parent().parent().find('.yelpBusId').val();
 		var busName = $(this).parent().parent().find('.busName').val(); 
 		var businessUrl = $(this).parent().parent().find('.busUrl').val(); //i think this was from html before too
-		var busImage = $(this).parent().parent().parent().parent().find('.busImage');
+		var busImage = $(this).parent().parent().parent().find('.busImage');
 		console.log(busImage, "business image"); //this needs stay html so we can render the image within Favorites page, why is it undefined??
 		var reviewCount = $(this).parent().parent().find('.reviewCount').html(); 
 		var rating = $(this).parent().parent().find('.rating').html(); 

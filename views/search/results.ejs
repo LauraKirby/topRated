@@ -35,17 +35,19 @@
 					<td class="rating"><%= business.rating %></td>
 					<td class='address'><%= business.location.address %></td>
 					<td>   
-					 <div class="ui form">
-					    <div class="field">
-						    <form class="favButton" action="/users/<%= id %>/favorites/" method="POST">
-						    <input type="submit" value="Favorite" class="compact mini ui grey labeled button">
-						    </div>
-						    <input type="hidden" class="yelpBusId" value="<%= business.id %>">
-						    <input type="hidden" class="busUrl" value="<%= business.url %>">
-						    <input type="hidden" class="busName" name="business[name]" value="<%= business.name %>">
-						    <input type="hidden" class="busImageUrl" value="<%= business.image_url %>">
-						    </form>
-						</div>
+
+					    
+						    <form class="favButton ui form" action="/users/<%= id %>/favorites/" method="POST">
+						      <div class="field">
+						        <input type="submit" value="Favorite" class="compact mini ui grey labeled button">
+						      </div>
+						      
+						      <input type="hidden" class="yelpBusId" value="<%= business.id %>">
+						      <input type="hidden" class="busUrl" value="<%= business.url %>">
+						      <input type="hidden" class="busName" name="business[name]" value="<%= business.name %>">
+						      <input type="hidden" class="busImageUrl" value="<%= business.image_url %>">
+						      </form>
+
 					</td>
 					
 					<td>
