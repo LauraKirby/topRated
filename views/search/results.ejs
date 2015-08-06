@@ -16,35 +16,33 @@
 
 		<table class="ui table segment">
 			<thead>
-				<tr>
-					<th>Bussiness</th>
-					<th></th>
-					<th>No. of Reviews</th>
-					<th>Rating</th>
-					<th>Location</th>
-					<th>Favorite</th>
-					<th>Comment</th>
-				</tr>
+
 			</thead>
 			<tbody>
 				<% results.businesses.forEach(function(business){ %>
 				<tr>
-					<td><p> <%= business.name %> </p><a href="<%= business.url %>" > Visit on Yelp </a></td>
+					<td><p> <%= business.name %> </p><a href="<%= business.url %>" > View on Yelp </a></td>
 					<td><img class="busImage ui small rounded image" src="<%= business.image_url %>" alt="Business Image"></td>
 					<td class="reviewCount"> <p><%= business.review_count %></p> </td>
 					<td class="rating"><%= business.rating %></td>
 					<td class='address'><%= business.location.address %></td>
 					<td>   
 
-					    
+					    <% if (!business.isFavorited) {%>
 						    <form class="favButton ui form" action="/users/<%= id %>/favorites/" method="POST">
-						      <input type="submit" value="Favorite" class="compact mini ui grey labeled button">
+						      <input type="submit" value="Favorite" class="compact small ui grey labeled button">
 						      <input type="hidden" class="yelpBusId" value="<%= business.id %>">
 						      <input type="hidden" class="busUrl" value="<%= business.url %>">
 						      <input type="hidden" class="busName" name="business[name]" value="<%= business.name %>">
-						      <input type="hidden" class="busImageUrl" value="<%= business.image_url %>">
 						      </form>
-
+						  <% } else { %> 
+						        <form class="favButton ui form" action="/users/<%= id %>/favorites/" method="POST">
+						        <input type="submit" value="Favorite" class="compact small ui yellow labeled button">
+						        <input type="hidden" class="yelpBusId" value="<%= business.id %>">
+						        <input type="hidden" class="busUrl" value="<%= business.url %>">
+						        <input type="hidden" class="busName" name="business[name]" value="<%= business.name %>">
+						        </form>
+						  <% } %>
 					</td>
 					
 					<td>
@@ -52,19 +50,23 @@
 					    <div class="field">
 						  	  <form class="commentForm" action="/users/<%= id %>/favorites/" method="POST">
 						  	    <textarea class="textAreaComment hiddenField" name="textarea" cols="20" rows="5" placeholder="Add comment"></textarea>
-						  	    <button id="saveBtn" type="submit" class="compact mini ui green labeled button">Save</button>
+						  	    <button id="saveBtn" type="submit" class="compact small ui green labeled button">Save</button>
 						  	    <input type="hidden" class="userIdData" value="<%= id %>">
 						      </form>
 						  	
-						    <button type="button" class="add compact mini ui pink labeled button">Add</button>
-						   
-						   <div class="ui segments">
-						     <div class="ui segment"><p><% foundUser.comments.forEach(function(comment){ %>
-						         <%= comment.content %>
-
-						     	  <% }) %></p>
-						     </div>
-						   </div>
+						  	<% if(business.comment){%>
+						  	<div class="ui segments">
+						  	  <div class="ui segment">
+						  	    <p><%=business.comment%></p>
+						  	  </div>	
+						  	  <div> 
+						  	    <a class="right paddingRL" href="" > Remove </a>
+						  	    <a class="right paddingRL" href="" > Edit </a>
+						  	  </div>	  	    
+						  	</div>
+						  	<% } else { %>
+						  	<button type="button" class="add compact small ui pink labeled button">Comment</button>    
+						  	<%  }%> 
 						    
 						    <div class="ui segments hiddenComm">
 						      <div class="ui segment">

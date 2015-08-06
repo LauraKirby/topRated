@@ -43,7 +43,7 @@ console.log(user, " user id from session id");
 			dataType: 'json'
 		}).done(function(favObjSaved){
 			//console.log ("inside the DONE function " + userFromSD);
-			$(this).children('input.compact').removeClass("blue").addClass("yellow");
+			$(this).children('input.compact').removeClass("grey").addClass("yellow");
 			//console.log("inside the DONE function " + this); 
 		}.bind(this));
 	}

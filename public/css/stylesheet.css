@@ -206,3 +206,11 @@ h1 {
 .commentForm{
 
 }
+.right {
+	float: right;
+}
+
+.paddingRL {
+	padding-left: 2%;
+	padding-right: 2%;
+}

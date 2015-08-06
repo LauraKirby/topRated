@@ -94,11 +94,24 @@ app.get('/users/:user_id', routeMiddleware.ensureLoggedIn, function(req, res){
 				//the favorites property will create an association on the user, to access the favorites
 				oneUser.favorites = favoritesByUserId;
 				//console.log(favoritesByUserId);
-				console.log("one favorite ", oneUser.favorites[0]);
+				//console.log("one favorite ", oneUser.favorites[0]);
 				db.Comment.find({user: req.params.user_id},
 					function(err, commentsByUserId) {
+						if (err) {
+							console.log(err); 
+							res.render("errors/404");
+						}
+						else {
+							oneUser.favorites.forEach(function(favorite) {
+								commentsByUserId.forEach(function(comment) {
+									if (favorite.yelpBusId === comment.busId) {
+										favorite.comment = comment.content;
+									}
+								});
+							});
+						}
 						oneUser.comments = commentsByUserId;
-						console.log("one comment", oneUser.comments[0]); 	
+						//console.log("one comment", oneUser.comments[0]); 	
 						res.render('users/show', {oneUser:oneUser, id:req.session.id});
 					});
 			});
@@ -132,7 +145,7 @@ app.get('/users/:user_id/logout', function(req, res){
 });
 
 
-//------------------- YELP ROUTES -------------------------------//
+//------------------- YELP SEARCH & RESULTS -------------------------------//
 
 //Search
 app.get('/users/:user_id/search', routeMiddleware.ensureLoggedIn, function(req, res){
@@ -147,35 +160,52 @@ app.get('/users/:user_id/search', routeMiddleware.ensureLoggedIn, function(req, 
 			if (err) {
 				console.log(err); 
 				res.render("errors/404");
-			} else if (results) {
+			} else {
 				userData = db.User.findById(req.session.id, function(err, foundUser){
-				//console.log("A FOUND USER" + foundUser); //works, foundUser is an object
 				var id = req.session.id; 
-				//console.log("this is the id " + id) 
 				//console.log("first returned item from the Yelp API: " + results.businesses[0].name);
 				db.Favorite.find({user: req.params.user_id}, 
-					//return favorites in an array and save to 'favoritesByUserId'
 					function(err, favoritesByUserId) {
-						if (err) throw err;
-						//where is the empty array 'favorites' coming from
-						//adding a property to our object. this property will only be available for the scope of this function.
-						//the favorites property will create an association on the user, to access the favorites
-						foundUser.favorites = favoritesByUserId;
-						console.log(foundUser.favorites[0]);
-						//console.log("one favorite ", foundUser.favorites[0]);
-						db.Comment.find({user: req.params.user_id},
-							function(err, commentsByUserId) {
-								foundUser.comments = commentsByUserId;
-								console.log(foundUser.comments[0]); 	
-								res.render("search/results", {results:results, foundUser:foundUser, term:term, id:id});
-							});
-					});
-				});
-			}
+						if (err) {
+							console.log(err); 
+							res.render("errors/404");
+						} else {
+							results.businesses.forEach(function(business){
+								business.isFavorited = false; 
+								favoritesByUserId.forEach(function(favorite){
+									if (business.id === favorite.yelpBusId){
+										business.isFavorited = true; 
+									}
+								})
+							})
+							foundUser.favorites = favoritesByUserId;
+						  //console.log(foundUser.favorites[0]);
+						  
+						  db.Comment.find({user: req.params.user_id},
+						  	function(err, commentsByUserId) {
+						  		if(err){
+						  			console.log(err); 
+						  			res.render("errors/404");
+						  		  } //end if err
+						  		 else {
+						  		 	results.businesses.forEach(function(business) {
+						  		 		commentsByUserId.forEach(function(comment) {
+						  		 			if (business.id === comment.busId) {
+						  		 				business.comment = comment.content;
+						  		 			}
+						  		 		});
+						  		 	});
+						  		 	res.render("search/results", {results:results, foundUser:foundUser, term:term, id:id});
+						  		 } //end else commentsByUserId
+						  	});
+						  } // end else favoritesByUserId
+					  });
+				  });
+			  }
 		});
 });
 
-
+ 
 //---------------- Favorites -------------------------//
 
 //INDEX -- Click "Favorites in Menu Bar" -- See all Favorites
@@ -246,12 +276,11 @@ app.listen(process.env.PORT || 3000, function(){
  
 /* 
 TO DO: 
-edit button - favorites - index.ejs
 view more - results - results.ejs 
 implement user authority - app.js
 fix err with url not clearing data
-comment button - results - results.ejs - when button clicked show text, use an AJAX call within searches.js
-
+if favorite is clicked again, it will be removed from user's favorites
+if click comment, leave comment field blank, then click save, 'comment' button should reappear
 */
 
 
