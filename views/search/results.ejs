@@ -38,10 +38,7 @@
 
 					    
 						    <form class="favButton ui form" action="/users/<%= id %>/favorites/" method="POST">
-						      <div class="field">
-						        <input type="submit" value="Favorite" class="compact mini ui grey labeled button">
-						      </div>
-						      
+						      <input type="submit" value="Favorite" class="compact mini ui grey labeled button">
 						      <input type="hidden" class="yelpBusId" value="<%= business.id %>">
 						      <input type="hidden" class="busUrl" value="<%= business.url %>">
 						      <input type="hidden" class="busName" name="business[name]" value="<%= business.name %>">
