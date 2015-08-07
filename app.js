@@ -78,7 +78,7 @@ app.post('/signup', function(req, res){
 	});
 });
 
-//SHOW User - Profile Page
+//------------------- USER SHOW - Profile Page -------------------------------//
 app.get('/users/:user_id', routeMiddleware.ensureLoggedIn, function(req, res){
 	//within User collection, find a user with user_id and store to oneUser
 	//ensure user exists
@@ -109,16 +109,14 @@ app.get('/users/:user_id', routeMiddleware.ensureLoggedIn, function(req, res){
 									}
 								});
 							});
-						}
-						oneUser.comments = commentsByUserId;
-						//console.log("one comment", oneUser.comments[0]); 	
 						res.render('users/show', {oneUser:oneUser, id:req.session.id});
-					});
+					}
+				});
 			});
 	});
 });
 
-//EDIT User 
+//------------------- USER EDIT -------------------------------//
 app.get('/users/:user_id/edit', routeMiddleware.ensureLoggedIn, function(req, res){
 	db.User.findById(req.params.user_id, 
 		function(err, user){
@@ -156,56 +154,66 @@ app.get('/users/:user_id/search', routeMiddleware.ensureLoggedIn, function(req, 
 		limit: 10 
 	}, 
 	//find all where user_id == comments.user_id && comment.businessId == yelp.businessId
-		function(err, results){
-			if (err) {
-				console.log(err); 
-				res.render("errors/404");
-			} else {
-				userData = db.User.findById(req.session.id, function(err, foundUser){
+	function(err, results){
+		if (err) {
+			console.log(err); 
+			res.render("errors/404");
+		} else {
+			userData = db.User.findById(req.session.id, function(err, foundUser){
 				var id = req.session.id; 
-				//console.log("first returned item from the Yelp API: " + results.businesses[0].name);
-				db.Favorite.find({user: req.params.user_id}, 
-					function(err, favoritesByUserId) {
-						if (err) {
-							console.log(err); 
-							res.render("errors/404");
-						} else {
-							results.businesses.forEach(function(business){
-								business.isFavorited = false; 
-								favoritesByUserId.forEach(function(favorite){
-									if (business.id === favorite.yelpBusId){
-										business.isFavorited = true; 
-									}
-								})
-							})
-							foundUser.favorites = favoritesByUserId;
-						  //console.log(foundUser.favorites[0]);
-						  
-						  db.Comment.find({user: req.params.user_id},
-						  	function(err, commentsByUserId) {
-						  		if(err){
-						  			console.log(err); 
-						  			res.render("errors/404");
-						  		  } //end if err
-						  		 else {
-						  		 	results.businesses.forEach(function(business) {
-						  		 		commentsByUserId.forEach(function(comment) {
-						  		 			if (business.id === comment.busId) {
-						  		 				business.comment = comment.content;
-						  		 			}
-						  		 		});
-						  		 	});
-						  		 	res.render("search/results", {results:results, foundUser:foundUser, term:term, id:id});
-						  		 } //end else commentsByUserId
-						  	});
-						  } // end else favoritesByUserId
-					  });
-				  });
-			  }
-		});
-});
+				if (err) {
+					console.log(err); 
+					res.render("errors/404");
+				} else {
+					db.Favorite.find({user: req.params.user_id}, 
+						function(err, favoritesByUserId) {
+							if (err) {
+								console.log(err); 
+								res.render("errors/404");
+							} else {
+								results.businesses.forEach(function(business){
+									business.isFavorited = false; 
+									favoritesByUserId.forEach(function(favorite){
+										if (business.id === favorite.yelpBusId){
+											business.isFavorited = true; 
+										}
+									});
+								});
+								foundUser.favorites = favoritesByUserId;	
+							  //console.log(foundUser.favorites[0]);
+							  
+							  db.Comment.find({user: req.params.user_id},
+							  	function(err, commentsByUserId) {
+							  		if(err){
+							  			console.log(err); 
+							  			res.render("errors/404");
+							  		  } 
+							  		  else {
+							  		  	results.businesses.forEach(function(business) {
+							  		  		commentsByUserId.forEach(function(comment) {
+							  		  			if (business.id === comment.busId) {
+							  		  				business.comment = comment.content;
+							  		  			}
+							  		  		});
+							  		  	});
+							  		  	res.render("search/results", {results:results, foundUser:foundUser, term:term, id:id});
+							  		 } //end else commentsByUserId
+							  		});
+							  } // end else favoritesByUserId
+							});
+				} // end else userData
+			});
+		} // end else results
+  });
+}); // end app.get
 
- 
+
+
+
+
+
+
+
 //---------------- Favorites -------------------------//
 
 //INDEX -- Click "Favorites in Menu Bar" -- See all Favorites
@@ -250,16 +258,6 @@ app.post('/users/:user_id/comments', function (req, res){
 			}
 	 });
 }); 
-
-//COMMENT - create comment from users/:user_id/favorites
-// app.post('/favorites/:id/comments', function (req, res){
-// 	var commentData = req.body.comm; 
-// 	db.User.create(
-// 	{
-
-// 	})
-
-// })
  
 
 // CATCH ALL

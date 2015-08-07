@@ -24,46 +24,31 @@
               </div>
           </div>
 
-          <div class="column ccccTwo">
-          </div>
-
-          <div class="column ddddTwo">       
-          </div>
     </div>
 
-
-
-
-    
     <div class="column bbbTwo ">
 
           <div class="column aaaaTwo">
           </div>
 
-          <div class="column">
+     
               <form class "ui form" action='/users/<%= id %>/search' >
-               <div class="bbbbTwo centerIsh field">
+               
+               <div class="column bbbbTwo centerIsh">
                   <input class="addPadding" type="text" name="term" value="juice"autofocus placeholder="term">
                </div>
-          </div>
-
-          <div class="column">
-              <div class="ccccTwo centerIsh">
+                    
+              <div class="column ccccTwo centerIsh">
                 <input class="addPadding" type="text" name="location" value="san francisco" placeholder="location">
               </div>
-          </div>
-
-          <div class="column">  
-              <div class=" ddddTwo centerIsh">
+          
+              <div class="column ddddTwo centerIsh">
                   <input type="submit" value="Search" class="ui green labeled button">    
               </div>
+
               </form>
-          </div>
 
     </div>
-    
-
-
   </div>    
 
 </div>
@@ -72,7 +57,7 @@
 
  <div class="ui one column centered">
   
-  <div class="ui column row addPadding">
+  <div class="ui column row">
 
     <table class="ui table segment">
       <thead>
@@ -85,15 +70,16 @@
       <tbody>
         <% oneUser.favorites.forEach(function(favorite){ %>
         <tr>
-          <div class="addPadding"> 
           <td> 
             <div><%= favorite.favName %></div> 
           </td>
           <td> 
             <div> <%- favorite.favImage %> </div>
           </td>
-          <td>N/A</td>
-          </div>
+          <td>
+						<div><%= favorite.comment %></div> 
+
+          </td>
         </tr>
           <%})%>
       </tbody>
