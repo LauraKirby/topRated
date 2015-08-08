@@ -27,8 +27,7 @@
 					<td class="rating"><%= business.rating %></td>
 					<td class='address'><%= business.location.address %></td>
 					<td>   
-
-					    <% if (!business.isFavorited) {%>
+					    <% if (!business.id) {%>
 						    <form class="favButton ui form" action="/users/<%= id %>/favorites/" method="POST">
 						      <input type="submit" value="Favorite" class="compact small ui grey labeled button">
 						      <input type="hidden" class="yelpBusId" value="<%= business.id %>">

@@ -159,57 +159,78 @@ app.get('/users/:user_id/search', routeMiddleware.ensureLoggedIn, function(req, 
 			console.log(err); 
 			res.render("errors/404");
 		} else {
-			userData = db.User.findById(req.session.id, function(err, foundUser){
-				var id = req.session.id; 
+			db.User.findById(req.session.id, function(err, foundUser){ //foundUser is an object
 				if (err) {
 					console.log(err); 
 					res.render("errors/404");
 				} else {
-					db.Favorite.find({user: req.params.user_id}, 
-						function(err, favoritesByUserId) {
-							if (err) {
-								console.log(err); 
-								res.render("errors/404");
-							} else {
-								results.businesses.forEach(function(business){
-									business.isFavorited = false; 
-									favoritesByUserId.forEach(function(favorite){
-										if (business.id === favorite.yelpBusId){
-											business.isFavorited = true; 
-										}
-									});
-								});
-								foundUser.favorites = favoritesByUserId;	
-							  //console.log(foundUser.favorites[0]);
-							  
-							  db.Comment.find({user: req.params.user_id},
-							  	function(err, commentsByUserId) {
-							  		if(err){
-							  			console.log(err); 
-							  			res.render("errors/404");
-							  		  } 
-							  		  else {
-							  		  	results.businesses.forEach(function(business) {
-							  		  		commentsByUserId.forEach(function(comment) {
-							  		  			if (business.id === comment.busId) {
-							  		  				business.comment = comment.content;
-							  		  			}
-							  		  		});
-							  		  	});
-							  		  	res.render("search/results", {results:results, foundUser:foundUser, term:term, id:id});
-							  		 } //end else commentsByUserId
-							  		});
-							  } // end else favoritesByUserId
-							});
-				} // end else userData
-			});
-		} // end else results
-  });
-}); // end app.get
+					favs = findFavsForResults({user: req.params.user_id}, results);
+					console.log(favs);	//WHY WON'T THIS RETURN MY ARRAY?? LINE 204
+					//foundUser.favorites = favs; 
+					//console.log(foundUser.favorites);
+					
+					// var comms = findCommsForResults({user: req.params.user_id}, results);
+					// foundUser.comments = comms; 			
+
+					res.render("search/results", {results:results, foundUser:foundUser, term:term, id:req.session.id, favs:favs});				  
+				} // else find user 
+			}); // db.User.findById(.. {..
+		} // else results 
+   } // search callback, params
+  ); // search params
+}); // app.get
 
 
 
+function findFavsForResults(paramsUserId, results){
+	var trueArr = [];
+	db.Favorite.find(paramsUserId, 
+		function(err, favoritesByUserId) {
+			if (err) {
+				console.log(err); 
+				//res.render("errors/404");
+			} else {
+				results.businesses.forEach(function(business){
+					business.isFavorited = false; 
+					favoritesByUserId.forEach(function(favorite){
+						if (business.id === favorite.yelpBusId){
+							business.isFavorited = true; 
+							trueArr.push(business.id);
+						} 
+					});
+				});
+		  } // else favoritesByUserId
+		  console.log(trueArr);
+		return trueArr;
+	 }
+	); // db.Favorite.find(.. {..
+}
 
+// function findCommsForResults(paramsUserId, results){
+// 	db.Comment.find(paramsUserId, 
+// 	//question: can i search by session id only? would be safer, so you not just any number can be typed in? 
+// 	//answer: you should be checking for 'is logged in' at the route, thus if someone types in a random number they cannot access someone else's data
+// 	//ansser: you could search by {user: req.params.user_id} but then you wouldn't need user_id in your route, and then your route wouldn't be restful
+// 		function(err, commentsByUserId) {
+// 			if(err){
+// 				console.log(err); 
+// 				//res.render("errors/404");
+// 			  } 
+// 			  else {
+// 			  	results.businesses.forEach(function(business) {
+// 			  		commentsByUserId.forEach(function(comment) {
+// 			  			if (business.id === comment.busId) {
+// 			  				business.comment = comment.content;
+// 			  			}
+// 			  		});
+// 			  	});
+// 			  	//res.render("search/results", {results:results, foundUser:foundUser, term:term, id:req.session.id});
+// 			 } //end else commentsByUserId
+// 			 return commentsByUserId;
+// 			}
+// 		);
+
+// }
 
 
 
