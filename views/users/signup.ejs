@@ -1,37 +1,58 @@
 <% include ../partials/landingHeader %>
 <div class="paddingCoBack">
-<div class="ui segment">
-  <p><h1>User Signup</h1></p>
+
+
+
+<div class="ui grid">
+  <div class="row">
+      <div class="one wide column"></div>
+      <div class="fourteen wide column">
+        <div class="ui segment">
+            <p><h1>User Signup</h1></p> 
+        </div>
+      </div>
+    <div class="one wide column"></div>
+  </div>
 </div>
 
-<div>
-	<form action="/signup" method="POST" class="ui form">
-  
-  <div class="two fields">
-    <div class="field">
-        <input type="text" name="user[userFirstName]" placeholder="First Name" autofocus>
-    </div>
-    <div class="field">
-         <input type="text" name="user[userImage]" placeholder="Image URL">
-    </div>
-  </div>
-  
-  <div class="two fields">
-    <div class="field">
-        <input type=text name="user[email]" placeholder="Email">
-    </div>
-    <div class="field">
-        <input type="password" name="user[password]" placeholder="Password">
-    </div>
-  </div>
-    
-  <div>
-    <p>
-      <input type="submit" value="Login" id="removePadding" class="ui purple labeled icon button">
-    </p>
-  </div>
+<div class="ui grid">
+  <div class="ui three wide column"> </div>
+    <div class="ui ten wide column">
 
-  </form>
-</div>
-</div>
+          <form action="/signup" method="POST" class="ui form">
+          
+          <div class="two fields">
+            <div class="field">
+                <input type="text" name="user[userFirstName]" placeholder="First Name" autofocus>
+            </div>
+            <div class="field">
+                 <input type="text" name="user[userImage]" placeholder="Image URL">
+            </div>
+          </div>
+          
+          <div class="two fields">
+            <div class="field">
+                <input type=text name="user[email]" placeholder="Email">
+            </div>
+            <div class="field">
+                <input type="password" name="user[password]" placeholder="Password">
+            </div>
+          </div>
+            
+          <div>
+            <p>
+              <input type="submit" value="Login" id="removePadding" class="ui purple labeled icon button">
+            </p>
+          </div>
+
+          </form>
+
+          <div>
+            <p></p>
+            <img src="<%= signUpPic %>" alt="">
+          </div>
+    </div> <!-- end ten  -->
+  </div> <!-- end ui grid -->
+
+</div> <!-- end padding -->
 <% include ../partials/landingFooter %>

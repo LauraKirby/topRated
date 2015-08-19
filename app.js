@@ -58,7 +58,8 @@ app.post('/login', function(req, res) { //do not need middleware bc of authentic
 
 //Signup - show sign up form
 app.get('/signup', function(req, res){
-	res.render("users/signup");
+	var signUpPic = "images/Robyn_Smitten.jpeg";
+	res.render("users/signup", {signUpPic:signUpPic});
 });
 
 //CREATE User -- Send data to server 
