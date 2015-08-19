@@ -36,7 +36,8 @@ app.use(loginMiddleware);
 app.get('/', function(req, res){ //do not need routeMiddleware.preventLoginSignup bc the only login is a POST, user will be authenticated (or not) at this point
 	//need to add logic for object
 	var myObj = {errorStr: undefined};
-	res.render("landingPage", myObj);
+	var pic = "images/getsmitten.jpg";
+	res.render("landingPage", {errorStr: undefined, pic:pic});
 });
 
 //----------- USER ROUTES -------------------//
@@ -164,15 +165,11 @@ app.get('/users/:user_id/search', routeMiddleware.ensureLoggedIn, function(req, 
 					console.log(err); 
 					res.render("errors/404");
 				} else {
-					favs = findFavsForResults({user: req.params.user_id}, results);
-					console.log(favs);	//WHY WON'T THIS RETURN MY ARRAY?? LINE 204
-					//foundUser.favorites = favs; 
-					//console.log(foundUser.favorites);
-					
-					// var comms = findCommsForResults({user: req.params.user_id}, results);
-					// foundUser.comments = comms; 			
+					var favs = findFavsForResults({user: req.params.user_id}, results, function(resultsDataArg){
+						console.log(resultsDataArg);
+						res.render("search/results", {results:results, foundUser:foundUser, term:term, id:req.session.id, favs:favs});
+					});
 
-					res.render("search/results", {results:results, foundUser:foundUser, term:term, id:req.session.id, favs:favs});				  
 				} // else find user 
 			}); // db.User.findById(.. {..
 		} // else results 
@@ -180,9 +177,12 @@ app.get('/users/:user_id/search', routeMiddleware.ensureLoggedIn, function(req, 
   ); // search params
 }); // app.get
 
+function resRender(route, data) {
+	res.render(route, data); 
+}
 
 
-function findFavsForResults(paramsUserId, results){
+function findFavsForResults(paramsUserId, results, annonFunc){
 	var trueArr = [];
 	db.Favorite.find(paramsUserId, 
 		function(err, favoritesByUserId) {
@@ -195,13 +195,14 @@ function findFavsForResults(paramsUserId, results){
 					favoritesByUserId.forEach(function(favorite){
 						if (business.id === favorite.yelpBusId){
 							business.isFavorited = true; 
-							trueArr.push(business.id);
+							//trueArr.push(business.id);
 						} 
 					});
 				});
 		  } // else favoritesByUserId
-		  console.log(trueArr);
-		return trueArr;
+		  //console.log(trueArr);
+		  annonFunc(results);
+		return results;
 	 }
 	); // db.Favorite.find(.. {..
 }

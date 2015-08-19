@@ -1,99 +1,48 @@
 <% include ./partials/landingHeader %>
 
-<div class="paddingCoBack">
-	
 
-		<div class="ui blue inverted segment">
-			<div class=>
-				<h1>Top Rated</h1>
-			</div>
-		</div>
-				
-
+<div class="topL" style="background-image: url(<%= pic %>)">
 		
-    
-    <div class="column aaa">
-        <% if (errorStr != undefined)  { %>
-    	  	  <p> <%= errorStr %> </p> 
-    	           <% } %>
-    	  <form action="/login" method="POST">
-    </div>
+		<div class="three column row">
+		 <div class="column">
 
-		
-		<div class="column bbb ">
-
-		      <div class="column">
-		          <div class='aaaa centerIsh'>
-		          	<input class="addPadding" type="text" value="mail" name="user[email]" placeholder="Email" value="">
-		          </div>
-		      </div>
-
-		      <div class="column">
-		          <div class='bbbb centerIsh'>
-		          	<input class="addPadding" type="password" value="laura" name="user[password]" placeholder="Pwd">
-		          </div>
-		      </div>
-
-		      <div class="column">
-		          <div class="cccc centerIsh">
-		          	<input type="submit" value="Login" class="ui green labeled button">
-		            </form>
-		          </div>
-		      </div>
-
-		      <div class="column">
-		        <div class="dddd centerIsh">
-		        	<a href="/signup" class="ui pink labeled button">or sign-up</a>
-		        </div>
-		      </div>
-
-		</div>
-	  
-	  
-<!-- 	  <div class="column ccc">			  
-	  </div> -->
-	
-<!-- 	</div>	 -->  
-
-<!-- <div class="one wide column">
-	<div class="showColumn">
-	</div>
-</div>
-
-<div class="one wide column">
-	<div class="showColumn"></div>
-</div>
-
-<div class="one wide column">
-	<div class="showColumn"></div>
-</div>
-
-<div class="one wide column">
-	<div class="showColumn"></div>
-</div>
-
-<div class="one wide column">
-	<div class="showColumn"></div>
-</div>
-
-<div class="one wide column">
-	<div class="showColumn"></div>
-</div>
-
-<div class="one wide column">
-	<div class="showColumn"></div>
-</div>
-
-<div class="one wide column">
-	<div class="showColumn"><p></p><p></p></div>
-</div>
- -->
-
-<!-- </div> -->
+		 				
+		 				<h2 class="cursive">Top Rated</h2>
+		 				<div class="slogan">
+		 					<p><strong>Spend more time at the right place,<br>
+		 					enjoying what you love.</p></strong>
+		 				</div>
+						
+							    <div class="column">
+							        <% if (errorStr != undefined)  { %>
+							    	  	  <p> <%= errorStr %> </p> 
+							    	           <% } %>
+						
+						    		<div class="ui form floatForm darkBrown ">
+						    		  <form action="/login" method="POST">
+						        	  <div class="field">
+						        	    <label>Password</label>
+						        	    <input class="addPadding" type="password" value="laura" name="user[password]" placeholder="Pwd">
+						        	  </div>
+						        	  <div class="field">
+						        	    <label>Email</label>
+						        	    <input class="addPadding" type="text" value="mail" name="user[email]" placeholder="Email" value="">
+						        	  </div>
+						        	  <div class="field">
+						        	    <label>Last name</label>
+						        	    <input type="text" placeholder="Last Name">
+						        	  </div>
+						        	  <div class="field">
+						        	  	<input type="submit" value="Login" class="mini ui red labeled button">
+						        	  	</form>
+						        	  	<a href="/signup" class="mini ui gray labeled button">or sign-up</a>    	    	  	
+						        	  </div>
+						        	</div>
+						 </div> <!-- end column -->
+    <div class="column"></div> <!-- end column -->
+  </div> <!-- end image  -->
 
 
-
-</div>
 
 
 

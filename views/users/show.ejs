@@ -1,14 +1,20 @@
 <% include ../partials/loggedInHeader %>
 <div class="paddingCoBack">
 
-  <div class="ui segment">
-
-    <p><h1>Welcome <%= oneUser.userFirstName %></h1></p> 
+<div class="ui grid">
+  <div class="row">
+      <div class="one wide column"></div>
+      <div class="fourteen wide column">
+        <div class="ui segment">
+            <p><h1>Welcome <%= oneUser.userFirstName %></h1></p> 
+        </div>
+      </div>
+    <div class="one wide column"></div>
   </div>
-
+</div>
 
 <div class="ui eight column grid aTwo">
-    
+
   <div class="row four column wide aaTwo">
     
     <div class="column aaaTwo"></div>
@@ -55,37 +61,41 @@
 
 
 
- <div class="ui one column centered">
-  
-  <div class="ui column row">
+ <div class="ui grid">  
 
-    <table class="ui table segment">
-      <thead>
-        <tr>
-          <th>My Favorites</th>
-          <th></th>
-          <th>My Comments</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% oneUser.favorites.forEach(function(favorite){ %>
-        <tr>
-          <td> 
-            <div><%= favorite.favName %></div> 
-          </td>
-          <td> 
-            <div> <%- favorite.favImage %> </div>
-          </td>
-          <td>
-						<div><%= favorite.comment %></div> 
+        <div class="row">
+        </div>
+        <div class="row">
+          <div class="one wide column"></div>
+          <div class="fourteen wide column">
+             <table class="ui table segment">
+                           <thead>
+                             <tr>
+                               <th>My Favorites</th>
+                               <th></th>
+                               <th>My Comments</th>
+                             </tr>
+                           </thead>
+                           <tbody>
+                             <% oneUser.favorites.forEach(function(favorite){ %>
+                             <tr>
+                               <td> 
+                                 <div><%= favorite.favName %></div> 
+                               </td>
+                               <td> 
+                                 <div> <%- favorite.favImage %> </div>
+                               </td>
+                               <td>
+                                 <div><%= favorite.comment %></div> 
 
-          </td>
-        </tr>
-          <%})%>
-      </tbody>
-    </table>
-
-
+                               </td>
+                             </tr>
+                               <%})%>
+                           </tbody>
+                         </table>
+          </div>
+      </div>
+  </div>
 
   </div>
  </div> 

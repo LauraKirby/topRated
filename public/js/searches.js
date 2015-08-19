@@ -5,13 +5,13 @@ var user = $($(".userIdData")[0]).val();
 console.log(user, " user id from session id");
 
 // ------------------------- Add & Save Favorite -------------------------
+//could use $.proxy to maintain the 'this' scope
+//see article http://esbueno.noahstokes.com/post/77292606977/self-executing-anonymous-functions-or-how-to-write
 	$(".favButton").submit(function(e){
 		e.preventDefault();
 		favData.apply(this, [postFavorite.bind(this)]); 			
 	});
-
 	function favData (callback){
-		// console.log($(this).parent()); 
 		var businessId = $(this).find('.yelpBusId').val();
 		var busName = $(this).find('.busName').val();
 		var businessUrl = $(this).parent().parent().find('.busUrl').val(); 

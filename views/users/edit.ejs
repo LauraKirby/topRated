@@ -1,32 +1,51 @@
 <% include ../partials/loggedInHeader %>
 <div class="paddingCoBack">
-<div class="ui segment">
-  <p><h1>Edit Profile</h1></p>
+
+
+<div class="ui grid">
+  <div class="row">
+      <div class="one wide column"></div>
+      <div class="fourteen wide column">
+        <div class="ui segment">
+            <p><h1>Edit Profile %></h1></p> 
+        </div>
+      </div>
+    <div class="one wide column"></div>
+  </div>
 </div>
 
-<div>
- <form action="/users/<%= user.id %>?_method=put" method="POST" class="ui form"> 
-	<div class="field">
-		<label for="nameFirstName">User Name: </label>
-		<input type="text" name="user[userFirstName]" class="form-control" value="<%= user.userFirstName %>" autofocus>
-	</div>
-	<div class="field">
-		<label for="userImage">Image:</label>
-		<input type="text" name="user[userImage]" class="form-control" value="<%= user.userImage %>">
-	</div>
-	<div class="field">
-		<label for="score">Email:</label>
-		<input type="text" name="user[email]" id="" class="form-control" value="<%= user.email %>">
-	</div>
-	<div>
-		<p></p>
-	</div>
-	<div class="field">
-	  <input type="submit" value="Save" class ="btn btn-info">
-	</div>
-</form>
-</div>
 
-</div>
+<div class="ui grid">
+  <div class="ui one wide column"> </div>
+    <div class="ui ten wide column">
+				
+				<div>
+				 <form action="/users/<%= user.id %>?_method=put" method="POST" class="ui form"> 
+					<div class="two fields">
+						<div class="field">
+							<label for="nameFirstName">User Name: </label>
+							<input type="text" name="user[userFirstName]" class="form-control" value="<%= user.userFirstName %>" autofocus>
+						</div>
+						<div class="field">
+					 		<label for="userImage">Image:</label>
+							<input type="text" name="user[userImage]" class="form-control" value="<%= user.userImage %>">
+						</div>
+					</div>
 
+					<div class="field">
+						<label for="score">Email:</label>
+						<input type="text" name="user[email]" id="" class="form-control" value="<%= user.email %>">
+					</div>
+					<div>
+						<p></p>
+					</div>
+					<div class="field">
+					  <input type="submit" value="Save" class ="small ui primary button">
+					</div>
+				</form>
+				</div>
+ 
+    </div> <!-- ten wide column -->
+  <div class="ui one wide column"> </div>
+</div> <!-- ui grid -->
 <% include ../partials/loggedInFooter %>
