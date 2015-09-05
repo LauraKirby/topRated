@@ -103,7 +103,6 @@ app.get('/users/:user_id', routeMiddleware.ensureLoggedIn, function(req, res){
 				//adding a property to our object. this property will only be available for the scope of this function.
 				//the favorites property will create an association on the user, to access the favorites
 				oneUser.favorites = favoritesByUserId;
-				oneUser.userImage = "public/images/user-default.png";
 				//console.log(favoritesByUserId);
 				//console.log("one favorite ", oneUser.favorites[0]);
 				db.Comment.find({user: req.params.user_id},
