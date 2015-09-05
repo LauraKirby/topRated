@@ -17,18 +17,27 @@
     <div class="one wide column"></div>
     	<div class="fourteen wide column">
 
-    			<table class="ui table segment">
+    			<table class="ui striped table segment">
     				<thead>
-
+                        <tr>
+                            
+                            <th ></th>
+                            <th></th>
+                            <th class="center aligned">Review Count</th>
+                            <th class="center aligned">Rating</th>
+                            <th class="center aligned">Address</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
     				</thead>
     				<tbody>
     					<% results.businesses.forEach(function(business){ %>
     					<tr>
-    						<td><p> <%= business.name %> </p><a href="<%= business.url %>" > View on Yelp </a></td>
     						<td><img class="busImage ui small rounded image" src="<%= business.image_url %>" alt="Business Image"></td>
-    						<td class="reviewCount"> <p><%= business.review_count %></p> </td>
-    						<td class="rating"><%= business.rating %></td>
-    						<td class='address'><%= business.location.address %></td>
+                            <td><h4><%= business.name %></h4><div class="viewYelp"><a href="<%= business.url %>" > View on Yelp </a></div></td>
+    						<td class="reviewCount center aligned"> <p><%= business.review_count %></p> </td>
+    						<td class="rating center aligned"><%= business.rating %></td>
+    						<td class="address center aligned"><%= business.location.address %></td>
     						<td>   
     						
     						    <% if (business.isFavorited === true) {%>
@@ -69,7 +78,7 @@
     							  	  </div>	  	    
     							  	</div>
     							  	<% } else { %>
-    							  	<button type="button" class="add compact small ui pink labeled button">Comment</button>    
+    							  	<button type="button" class="add compact small ui button">Comment</button>    
     							  	<%  }%> 
     							    
     							    <div class="ui segments hiddenComm">
@@ -86,9 +95,9 @@
     					<% }); %> 
     				</tbody>
     				<tfoot>
-    				  <tr><th colspan="7">
-    				   <!--  <div class="ui green labeled button">More</div> -->
-    				  </th>
+    				  <!-- <tr><th colspan="7"> -->
+    				  <!-- <div class="ui green labeled button">More Results</div> -->
+    				  <!-- </th> -->
     				</tr></tfoot>
     			</table>
   		

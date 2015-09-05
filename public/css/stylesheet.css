@@ -1,5 +1,5 @@
 body{
-	background-color: #BCAA99;
+	background-color: #FFE5D9;
 
 }
 #bg {
@@ -13,8 +13,16 @@ body{
 }
 
 h1 {
-	font-family: 'Orbitron', sans-serif;
-	text-align: center
+	font-family: 'Pacifico', cursive;
+	text-align: center;
+	font-size: 350%;
+	color: #FFE5D9
+}
+
+h4 {
+	font-family: 'Pacifico', cursive;
+	text-align: center;
+	font-size: 140%;
 }
 
 .cursive {
@@ -23,16 +31,21 @@ h1 {
 	padding-top: 6%;
 	margin-left: 3%;
 }
-
+.slogan {
+	font-family: 'Work Sans', sans-serif;
+	text-align: left;
+	margin-left: 2%;
+	font-size: 100%;
+}
 .addPadding {
-	background-color: #BCAA99; 
+	background-color: #FFE5D9; 
 	padding: 5%;
 	padding-bottom: 1%;
 	margin-bottom: 1px;
 }
 
 .paddingCoBack {
-	background-color: #BCAA99; 
+	background-color: #FFE5D9; 
 	padding-top: 2%;
 	padding-bottom: 2%;
 	margin-bottom: 2%;
@@ -40,7 +53,7 @@ h1 {
 }
 
 .lightBrown {
-	background-color: #BCAA99; 
+	background-color: #FFE5D9; 
 }
 
 .aa {
@@ -86,7 +99,7 @@ h1 {
 }
 
 .profileDiv {
-	background-color: #BCAA99; 
+	background-color: #FFE5D9; 
 	padding: 5%;
 }
 
@@ -96,13 +109,13 @@ h1 {
 }
 
 .aTwo {
-	background-color: #BCAA99; 
+	background-color: #FFE5D9; 
 	margin: 1%;
 	padding: 5px;
 }
 
 .aaTwo {
-	background-color: #BCAA99; 
+	background-color: #FFE5D9; 
 	margin: 1%;
 	padding: 5px;
 
@@ -114,36 +127,32 @@ h1 {
 }
 
 .bbbTwo {
-	background-color: #BCAA99; 
+	background-color: #FFE5D9; 
 	padding: 5px;
 }
 
 .aaaaTwo {
-	background-color: #BCAA99; 
+	background-color: #FFE5D9; 
 	height: 70px;
 	padding: 5px;
 }
 
 .bbbbTwo {
-	background-color: #BCAA99; 
+	background-color: #FFE5D9; 
 	height: 70px;
 
 }
 
 .ccccTwo {
-	background-color: #BCAA99; 
+	background-color: #FFE5D9; 
 	height: 70px;
 
 }
 
 .ddddTwo {
-	background-color: #BCAA99; 
+	background-color: #FFE5D9; 
 	height: 70px;
 
-}
-
-.zz {
-	background-color: LightOrange;
 }
 
 .addPadding{
@@ -173,15 +182,6 @@ h1 {
 
 .white {
 	background-color: white;
-}
-
-.showColumn {
-	height: 10px;
-	background-color: DodgerBlue;
-}
-
-.headerBack {
-	background-color: Gold;
 }
 
 .hiddenField {
@@ -240,12 +240,6 @@ h1 {
 	padding-left: 2%;
 	padding-right: 2%;
 }
-.slogan {
-	font-family: 'Work Sans', sans-serif;
-	text-align: left;
-	margin-left: 2%;
-	font-size: 100%;
-}
 .min{
 	min-height: 200px;
 }
@@ -266,7 +260,7 @@ h1 {
 	width: 100%;
 	height: 100%;
 	background-repeat: no-repeat;
-	background-color: #BCAA99;
+	background-color: #FFE5D9;
 	background-repeat: no-repeat;
 }
 .floatForm {
@@ -279,5 +273,29 @@ h1 {
 }
 
 .backColor {
-	background-color: #BCAA99;
+	background-color: #FFE5D9;
+}
+.ui.menu {
+
+	opacity: .8
+}
+.ui.segment {
+	background-color: #C60000;
+}
+.ui.striped.table{
+	background-color: #DCD9DE;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 700;
+	font-size: 125%;
+
+}
+.viewYelp {
+	text-align: center;
+	font-size: 75%;
+}
+.td.element.style {
+	text-align: center;
+}
+.rating {
+	text-align: center;
 }

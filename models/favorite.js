@@ -1,3 +1,5 @@
+//make a lib directory for shared components
+
 var mongoose = require("mongoose"); 
 
 var favoriteSchema = new mongoose.Schema({
@@ -19,3 +21,6 @@ module.exports = Favorite;
 // 		type: mongoose.Schema.Types.ObjectId, 
 // 		ref: "User"
 // 	}
+
+//multithreaded express with cluster 
+// 

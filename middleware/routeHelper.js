@@ -25,7 +25,7 @@ var routeHelpers = {
 		});
 	},
 
-//Why did Tim say i don't need this? -- this won't be needed bc once login is clicked we send back a message if user is not found
+//this won't be needed bc once login is clicked we send back a message if user is not found
 	// preventLoginSignup: function(req, res, next){
 	// 	if(req.session.id !== null && req.session.id !== undefined){
 	// 		res.redirect('/'); 

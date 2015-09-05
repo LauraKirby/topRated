@@ -26,13 +26,13 @@
 
           <div class="column bbbbTwo">
               <div class="addSpace">
-                <a href="/users/<%= id %>/edit" class="compact mini ui black labeled button">Edit Profile</a>
+                <a href="/users/<%= id %>/edit" class="compact mini ui button">Edit Profile</a>
               </div>
           </div>
 
     </div>
 
-    <div class="column bbbTwo ">
+    <div class="column bbbTwo">
 
           <div class="column aaaaTwo">
           </div>
@@ -49,7 +49,7 @@
               </div>
           
               <div class="column ddddTwo centerIsh">
-                  <input type="submit" value="Search" class="ui green labeled button">    
+                  <input type="submit" value="Search" class="ui button">    
               </div>
 
               </form>
@@ -68,7 +68,7 @@
         <div class="row">
           <div class="one wide column"></div>
           <div class="fourteen wide column">
-             <table class="ui table segment">
+             <table class="ui striped table">
                            <thead>
                              <tr>
                                <th>My Favorites</th>
@@ -80,7 +80,7 @@
                              <% oneUser.favorites.forEach(function(favorite){ %>
                              <tr>
                                <td> 
-                                 <div><%= favorite.favName %></div> 
+                                 <div><h4><%= favorite.favName %></h4><div class="viewYelp"><a href="<%= favorite.favUrl %>" > View on Yelp </a></div></div> 
                                </td>
                                <td> 
                                  <div> <%- favorite.favImage %> </div>

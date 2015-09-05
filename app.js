@@ -8,6 +8,7 @@ var express = require("express"),
 	loginMiddleware = require("./middleware/loginHelper"), 
 	routeMiddleware = require("./middleware/routeHelper"), 
 	morgan = require("morgan");
+	userFavs = require("./getUserFavs");
 
 app.use(morgan('tiny'));
 app.set('view engine', 'ejs'); 
@@ -15,6 +16,7 @@ app.use(methodOverride('_method'));
 app.use(express.static(__dirname + '/public')); 
 app.use(bodyParser.urlencoded({extended:true})); 
 app.use(loginMiddleware);
+app.use(userFavs);
 
 var yelp = require("yelp").createClient({
 	consumer_key: process.env.CONSUMER_KEY,  
@@ -48,6 +50,9 @@ app.post('/login', function(req, res) { //do not need middleware bc of authentic
 			if (err) {
 				res.render("landingPage", {errorStr: err}); 
 			} else if(!err && user !== null) {
+				if (user.userImage === null) {
+					newUser.userImage = "public/images/user-default.png";
+				}
 				req.login(user); 
 				res.redirect("/users/" + user._id); //here we are stating that it is clearly a mongo id - should i update to a session id
 			} else {
@@ -71,6 +76,9 @@ app.post('/signup', function(req, res){
 		if (err) {
 			console.log(err);
 		} else if (savedUser){
+			if(newUser.userImage === null){
+				newUser.userImage = "public/images/user-default.png";
+			}
 			req.login(savedUser); //user is now logged in, we have access to req.session.id
 			res.redirect('/users/' + req.session.id);
 		} 													
@@ -95,6 +103,7 @@ app.get('/users/:user_id', routeMiddleware.ensureLoggedIn, function(req, res){
 				//adding a property to our object. this property will only be available for the scope of this function.
 				//the favorites property will create an association on the user, to access the favorites
 				oneUser.favorites = favoritesByUserId;
+				oneUser.userImage = "public/images/user-default.png";
 				//console.log(favoritesByUserId);
 				//console.log("one favorite ", oneUser.favorites[0]);
 				db.Comment.find({user: req.params.user_id},
@@ -166,6 +175,9 @@ app.get('/users/:user_id/search', routeMiddleware.ensureLoggedIn, function(req, 
 					console.log(err); 
 					res.render("errors/404");
 				} else {
+					// CALL FIND USER FAVS 
+					// maybe all i really wanted was more middleware similar to loginHelper?
+					app.get("/getUserFavs/");
 					var favs = findFavsForResults({user: req.params.user_id}, results, function(resultsDataArg){
 						console.log(resultsDataArg);
 						res.render("search/results", {results:results, foundUser:foundUser, term:term, id:req.session.id, favs:favs});
@@ -178,11 +190,7 @@ app.get('/users/:user_id/search', routeMiddleware.ensureLoggedIn, function(req, 
   ); // search params
 }); // app.get
 
-function resRender(route, data) {
-	res.render(route, data); 
-}
-
-
+// ---------------- REMOVED FIND USER FAVS (see getUserFavs.js) ----------------
 function findFavsForResults(paramsUserId, results, annonFunc){
 	var trueArr = [];
 	db.Favorite.find(paramsUserId, 
@@ -200,13 +208,16 @@ function findFavsForResults(paramsUserId, results, annonFunc){
 						} 
 					});
 				});
-		  } // else favoritesByUserId
-		  //console.log(trueArr);
+		  } // end lse favoritesByUserId
 		  annonFunc(results);
 		return results;
 	 }
-	); // db.Favorite.find(.. {..
+	); // end db.Favorite.find(.. {..
 }
+
+// function resRender(route, data) {
+// 	res.render(route, data); 
+// }
 
 // function findCommsForResults(paramsUserId, results){
 // 	db.Comment.find(paramsUserId, 
