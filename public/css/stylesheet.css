@@ -254,6 +254,15 @@ h4 {
 	border-radius: 2%;
 	margin-bottom: 1%;
 }
+.behindHeader{
+	background-color: #E9E9ED;
+	opacity: .5;
+	padding-left: 2%;
+	padding-right: 2%;
+	padding-bottom: 2%;
+	border-radius: 2%;
+	margin-bottom: 1%;
+}
 .topL{
 	display: block;
 	position: absolute;
@@ -264,14 +273,22 @@ h4 {
 	background-repeat: no-repeat;
 }
 .floatForm {
+	float: right;
+	padding-top: 2%;
+	margin-right: 4%;
+	margin-left: 4%;
+	margin-top: 10%;
 	position: relative;
+}
+.floatTextRight{
 	float: left;
 	padding-top: 2%;
 	margin-right: 4%;
 	margin-left: 4%;
-	margin-top: 10%
+	margin-top: 10%;
+	position: absolute;
+	max-width: 250px;
 }
-
 .backColor {
 	background-color: #FFE5D9;
 }
@@ -298,4 +315,30 @@ h4 {
 }
 .rating {
 	text-align: center;
+}
+.darkGray{
+  background-color: #3F3F3F;
+}
+.ui.grid.darkGray{
+	position: relative;
+}
+/*bottom left*/
+.overlayText: {
+	position: absolute;
+	bottom: 0; 
+	left: 0.5em; 
+	width: 400px; 
+	font-weight: bold; 
+	color: #fff;
+}
+/*top right*/
+.overlayTextTopRt{
+	position: absolute; 
+	top: 1em; 
+	right: 2em; 
+	width: 120px; 
+	padding: 4px; 
+	background-color: #fff; 
+	font-weight: bold; 
+	font-size: 11px;
 }

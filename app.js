@@ -51,9 +51,12 @@ app.post('/login', function(req, res) { //do not need middleware bc of authentic
 				res.render("landingPage", {errorStr: err}); 
 			} else if(!err && user !== null) {
 				if (user.userImage === null) {
-					newUser.userImage = "public/images/user-default.png";
+					user.userImage = "images/user-default.png";
 				}
+
 				req.login(user); 
+				//WHY WON'T THIS PRINT ON LOGIN?
+				console.log(user);
 				res.redirect("/users/" + user._id); //here we are stating that it is clearly a mongo id - should i update to a session id
 			} else {
 				res.render("landingPage", {errorStr: "Error: Could not authenticate"}); 
@@ -77,7 +80,7 @@ app.post('/signup', function(req, res){
 			console.log(err);
 		} else if (savedUser){
 			if(newUser.userImage === null){
-				newUser.userImage = "public/images/user-default.png";
+				newUser.userImage = "images/user-default.png";
 			}
 			req.login(savedUser); //user is now logged in, we have access to req.session.id
 			res.redirect('/users/' + req.session.id);
@@ -93,6 +96,7 @@ app.get('/users/:user_id', routeMiddleware.ensureLoggedIn, function(req, res){
 	//within User collection, find a user with user_id and store to oneUser
 	//ensure user exists
 	db.User.findById(req.params.user_id, function(err, oneUser){
+		var tempUserImg;
 		if (err) throw err;
 		//within Favorite collection, find key 'user' with property value of 'req.params.user_id'
 		db.Favorite.find({user: req.params.user_id}, 
@@ -103,6 +107,9 @@ app.get('/users/:user_id', routeMiddleware.ensureLoggedIn, function(req, res){
 				//adding a property to our object. this property will only be available for the scope of this function.
 				//the favorites property will create an association on the user, to access the favorites
 				oneUser.favorites = favoritesByUserId;
+				if(oneUser.userImage === ""){
+						tempUserImg = "images/user-default.png";
+				}
 				//console.log(favoritesByUserId);
 				//console.log("one favorite ", oneUser.favorites[0]);
 				db.Comment.find({user: req.params.user_id},
@@ -119,7 +126,7 @@ app.get('/users/:user_id', routeMiddleware.ensureLoggedIn, function(req, res){
 									}
 								});
 							});
-						res.render('users/show', {oneUser:oneUser, id:req.session.id});
+						res.render('users/show', {oneUser:oneUser, id:req.session.id, tempUserImg:tempUserImg});
 					}
 				});
 			});
