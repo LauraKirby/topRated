@@ -1,12 +1,6 @@
 <% include ./partials/landingHeader %>
 
-
-
-<!-- <div class="topL" style="background-image: url(<%= pic %>)"> -->
-
-
-  <img src="<%= pic %>" id="bg" class="ui fuild image" alt="">
-  
+<img src="<%= pic %>" id="bg" class="ui fuild image" alt="">
 
 <div class="ui grid ">
   <div class="row">
@@ -20,54 +14,42 @@
      	</div>
     <div class="one wide column"></div>
   </div> <!-- end row -->
-
   <div class="row">
-  	 <div class="one wide column"></div>
+    <div class="one wide column"></div>
       <div class="fourteen wide column">
-      			    <div class="column">
-      			        <% if (errorStr != undefined)  { %>
-      			    	  	  <p> <%= errorStr %> </p> 
-      			    	           <% } %>
-      		
-      		    		<div class="ui form floatForm darkBrown">
-      		    		  <form action="/login" method="POST">
-      		        	  <div class="field">
-                        <label>Email</label>
-                        <input class="addPadding" type="text" autofocus name="user[email]" placeholder="Email" value="">
-      		        	  </div>
-      		        	  <div class="field">
-                        <label>Password</label>
-                        <input class="addPadding" type="password" name="user[password]" placeholder="Pwd">
-      		        	  </div>
-      		        	  <div class="field">
-      		        	  	<input type="submit" value="Login" class="mini ui red labeled button">
-      		        	  	</form>
-      		        	  	<a href="/signup" class="mini ui gray labeled button">or sign-up</a>  
-      		        	  </div>
-      		        	</div>
+        <div class="column">
 
-                    <div class="floatTextRight darkBrown">
-                      To demo application, sign in using email: <strong>admin@example.com</strong> and password: <strong>admin</strong>. 
-                      <p></p>
-                      <p>
-                        Complete a search to find the "top rated" business. Then favorite or comment on a bussiness to store the data to your profile. Head over the the "favorites" section to see all of your favorites. Head back to your profile to see an overview of your account. 
-                      </p>
-                    </div>
-      		       
-      		 </div> <!-- end 14 wide column -->
-				
-
-      </div>
+          <div class="ui form floatForm darkBrown">
+            <form action="/login" method="POST">
+              <div class="field">
+                <label>Email</label>
+                <input class="addPadding" type="text" autofocus name="user[email]" placeholder="Email" value="">
+              </div>
+              <div class="field">
+                <label>Password</label>
+                <input class="addPadding" type="password" name="user[password]" placeholder="Pwd">
+              </div>
+              <div class="field">
+                <input type="submit" value="Login" class="mini ui red labeled button">
+                <a href="/signup" class="mini ui gray labeled button">or sign-up</a>  
+                <% if (errorStr != undefined)  { %>
+                  <p class="errorMessage"> <%= errorStr %> </p> 
+                <% } %>
+              </div>
+            </form>
+          </div>
+          <div class="floatTextRight darkBrown">
+            <p>
+              To demo application, sign in using email: <strong>admin@example.com</strong> and password: <strong>admin</strong>.
+            </p>
+            <p>
+              Complete a search to find the "top rated" business. Then favorite or comment on a bussiness to store the data to your profile. Head over the the "favorites" section to see all of your favorites. Head back to your profile to see an overview of your account.
+            </p>
+          </div>
+        </div> <!-- end column -->
+      </div> <!-- end 14 wide column -->
     <div class="one wide column"></div>
   </div> <!-- end row -->
+</div> <!-- end grid -->
 
-   </div> <!-- end grid -->
-
- </div> <!-- end image  -->
-
-
-
-
-
-
-	<% include ./partials/landingFooter %>
+<% include ./partials/landingFooter %>

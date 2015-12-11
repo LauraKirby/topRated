@@ -48,7 +48,8 @@ app.post('/login', function(req, res) { //do not need middleware bc of authentic
 	db.User.authenticate(req.body.user, 
 		function(err, user){
 			if (err) {
-				res.render("landingPage", {errorStr: err}); 
+				var pic = "images/getsmitten.jpg";
+				res.render("landingPage", {errorStr: err, pic:pic}); 
 			} else if(!err && user !== null) {
 				if (user.userImage === null) {
 					user.userImage = "images/user-default.png";
@@ -59,7 +60,8 @@ app.post('/login', function(req, res) { //do not need middleware bc of authentic
 				console.log(user);
 				res.redirect("/users/" + user._id); //here we are stating that it is clearly a mongo id - should i update to a session id
 			} else {
-				res.render("landingPage", {errorStr: "Error: Could not authenticate"}); 
+				var pic = "images/getsmitten.jpg";
+				res.render("landingPage", {errorStr: "Error: Could not authenticate", pic:pic}); 
 			}
 	});
 });

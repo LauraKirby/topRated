@@ -1,105 +1,83 @@
 <% include ../partials/loggedInHeader %>
 <div class="paddingCoBack">
-<div class="ui grid">
-  <div class="row">
+
+  <div class="ui grid">
+    <div class="row">
+        <div class="one wide column"></div>
+        <div class="fourteen wide column">
+          <div class="ui segment">
+              <p><h1>Welcome <%= oneUser.userFirstName %></h1></p> 
+          </div>
+        </div>
       <div class="one wide column"></div>
-      <div class="fourteen wide column">
-        <div class="ui segment">
-            <p><h1>Welcome <%= oneUser.userFirstName %></h1></p> 
+    </div>
+  </div>
+
+  <div class="ui eight column grid aTwo">
+    <div class="row four column wide aaTwo">
+      <div class="column aaaTwo"></div>
+      <div class="column aaaTwo">
+        <div class="column profileDiv">
+          <img class="ui medium rounded image" src="<%= oneUser.userImage %>" alt="user image">
+        </div>
+        <div class="column bbbbTwo">
+          <div class="addSpace">
+            <a href="/users/<%= id %>/edit" class="compact mini ui button">Edit Profile</a>
+          </div>
         </div>
       </div>
-    <div class="one wide column"></div>
-  </div>
-</div>
-
-<div class="ui eight column grid aTwo">
-
-  <div class="row four column wide aaTwo">
-    
-    <div class="column aaaTwo"></div>
-
-    <div class="column aaaTwo">
-          <div class="column profileDiv">
-                <img class="ui medium rounded image" src="<%= oneUser.userImage %>" alt="user image">
-
-          </div>
-
-          <div class="column bbbbTwo">
-              <div class="addSpace">
-                <a href="/users/<%= id %>/edit" class="compact mini ui button">Edit Profile</a>
-              </div>
-          </div>
-
-    </div>
-
-    <div class="column bbbTwo">
-
-          <div class="column aaaaTwo">
-          </div>
-
-     
-              <form class = "ui form" action='/users/<%= id %>/search' >
-               
-               <div class="column bbbbTwo centerIsh">
-                  <input class="addPadding" type="text" name="term" autofocus placeholder="search term">
-               </div>
-                    
-              <div class="column ccccTwo centerIsh">
-                <input class="addPadding" type="text" name="location" placeholder="location">
-              </div>
-          
-              <div class="column ddddTwo centerIsh">
-                  <input type="submit" value="Search" class="ui button">    
-              </div>
-
-              </form>
-
-    </div>
-  </div>    
-
-</div>
-
-
-
- <div class="ui grid">  
-
-        <div class="row">
+      <div class="column bbbTwo">
+        <div class="column aaaaTwo">
         </div>
-        <div class="row">
-          <div class="one wide column"></div>
-          <div class="fourteen wide column">
-             <table class="ui striped table">
-                           <thead>
-                             <tr>
-                               <th>My Favorites</th>
-                               <th></th>
-                               <th>My Comments</th>
-                             </tr>
-                           </thead>
-                           <tbody>
-                             <% oneUser.favorites.forEach(function(favorite){ %>
-                             <tr>
-                               <td> 
-                                 <div><h4><%= favorite.favName %></h4><div class="viewYelp"><a href="<%= favorite.favUrl %>" > View on Yelp </a></div></div> 
-                               </td>
-                               <td> 
-                                 <div> <%- favorite.favImage %> </div>
-                               </td>
-                               <td>
-                                 <div><%= favorite.comment %></div> 
+          <form class = "ui form" action='/users/<%= id %>/search' >
+            <div class="column bbbbTwo centerIsh">
+              <input class="addPadding" type="text" name="term" autofocus placeholder="search term">
+            </div>
+            <div class="column ccccTwo centerIsh">
+              <input class="addPadding" type="text" name="location" placeholder="location">
+            </div>
+            <div class="column ddddTwo centerIsh">
+              <input type="submit" value="Search" class="ui button">    
+            </div>
+          </form>
+      </div>
+    </div>
+  </div>
 
-                               </td>
-                             </tr>
-                               <%})%>
-                           </tbody>
-                         </table>
-          </div>
+  <div class="ui grid">  
+    <div class="row">
+    </div>
+    <div class="row">
+      <div class="one wide column"></div>
+        <div class="fourteen wide column">
+          <table class="ui striped table">
+            <thead>
+              <tr>
+                <th>My Favorites</th>
+                <th></th>
+                <th>My Comments</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% oneUser.favorites.forEach(function(favorite){ %>
+              <tr>
+                <td> 
+                  <div><h4><%= favorite.favName %></h4><div class="viewYelp"><a href="<%= favorite.favUrl %>" > View on Yelp </a></div></div> 
+                </td>
+                <td> 
+                  <div> <%- favorite.favImage %> </div>
+                </td>
+                <td>
+                  <div><%= favorite.comment %></div> 
+                </td>
+              </tr>
+                <%})%>
+            </tbody>        
+          </table>
+        </div>
       </div>
   </div>
 
-  </div>
- </div> 
-
 </div>
 
- <% include ../partials/loggedInFooter %>
+<% include ../partials/loggedInFooter %>

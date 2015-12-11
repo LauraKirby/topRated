@@ -342,3 +342,6 @@ h4 {
 	font-weight: bold; 
 	font-size: 11px;
 }
+.errorMessage{
+	color: red;
+}
